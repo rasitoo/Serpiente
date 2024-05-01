@@ -1,4 +1,4 @@
-package ui;
+package ui.canva;
 
 import java.awt.*;
 

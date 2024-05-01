@@ -1,4 +1,4 @@
-package ui;
+package ui.canva;
 public class Utilidades {
 	public static void espera(int milisegundos) {
 		// Se espera unos milisegundos.

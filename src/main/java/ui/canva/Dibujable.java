@@ -1,4 +1,4 @@
-package ui;
+package ui.canva;
 // Un objeto que sea Dibujable es un objeto al que
 // le puedo pedir que se pinte en un lienzo que yo le doy.
 // El objeto, desde este m�todo, lanzar� al Lienzo las
