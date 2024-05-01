@@ -36,7 +36,7 @@ public class Teclado implements KeyListener, Tickable {
 		for (int i = 0; i < NUM_TECLAS; ++i) {
 			if (estadoTeclasBasico[i]) { // La tecla est� pulsada.
 				if (estadoTeclasCon1Vez[i] == EstadoTeclaCon1Vez.LIBRE) {
-					// La tecla est� abajo ahora pero no lo estaba antes.
+					// La tecla est� abajo ahora, pero no lo estaba antes.
 					estadoTeclasCon1Vez[i] = EstadoTeclaCon1Vez.PRESIONADA_1VEZ;
 				} else {
 					// La tecla est� abajo ahora y YA lo estaba antes.
@@ -52,8 +52,8 @@ public class Teclado implements KeyListener, Tickable {
 		return estadoTeclasCon1Vez[codigoTecla] == EstadoTeclaCon1Vez.PRESIONADA_1VEZ;
 	}
 
-	// M�todo de la interfaz KeyListener. NO necesitamos llamarlo nosotros,
-	// es un m�todo para que "el sistema" nos informe de teclas pulsadas.
+	// Metodo de la interfaz KeyListener. NO necesitamos llamarlo nosotros,
+	// es un metodo para que "el sistema" nos informe de teclas pulsadas.
 	public synchronized void keyPressed(KeyEvent evento) {
 		int codigo = evento.getKeyCode();
 		
@@ -76,10 +76,10 @@ public class Teclado implements KeyListener, Tickable {
 		}
 	}
 
-	// M�todo de la interfaz KeyListener. NO necesitamos llamarlo nosotros,
-	// es un m�todo para que "el sistema" nos informe de teclas pulsadas.
+	// Metodo de la interfaz KeyListener. NO necesitamos llamarlo nosotros,
+	// es un metodo para que "el sistema" nos informe de teclas pulsadas.
 	public void keyTyped(KeyEvent e) {
-		// No necesitamos este m�todo pero como la interfaz
+		// No necesitamos este metodo, pero como la interfaz
 		// KeyListener nos obliga a implementarlo, lo ponemos vac�o.
 	}
 
