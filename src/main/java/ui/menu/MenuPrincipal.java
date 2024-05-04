@@ -16,11 +16,11 @@ public class MenuPrincipal {
         ventana.setPreferredSize(new Dimension(900,600));
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //ImageIcon imagenFondo = new ImageIcon("FondoMenuPrincipal.jpg");
-        //JLabel fondo = new JLabel(imagenFondo);
-        //fondo.setSize(ventana.getContentPane().getSize());
-        //fondo.setOpaque(true);
-        //ventana.getContentPane().add(fondo, BorderLayout.CENTER);
+        ImageIcon imagenFondo = new ImageIcon("C:\\Users\\paros\\IdeaProjects\\Serpiente\\FondoMenuPrincipal.jpg");
+        JLabel fondo = new JLabel(imagenFondo);
+        fondo.setSize(ventana.getContentPane().getSize());
+        fondo.setOpaque(true);
+        ventana.getContentPane().add(fondo, BorderLayout.CENTER);
 
         int maxGap = 20;
         GridLayout experimentLayout = new GridLayout(1,1);
@@ -29,16 +29,16 @@ public class MenuPrincipal {
         parteCentral.setLayout(new FlowLayout(FlowLayout.CENTER));
         parteCentral.setPreferredSize(new Dimension(150,50));
 
-
         JButton boton = new JButton("Jugar");
         Dimension buttonSize = boton.getPreferredSize();
         parteCentral.setPreferredSize(new Dimension((int) (buttonSize.getWidth() * 1.5) + maxGap,
                 (int) (buttonSize.getHeight() * 2.5) + maxGap * 2));
         ventana.getContentPane().add(parteCentral, BorderLayout.CENTER);
-        parteCentral.setBorder(BorderFactory.createEmptyBorder(240, 20, 20, 20));
+        parteCentral.setBorder(BorderFactory.createEmptyBorder(240, 20, 20, 20));//para poner bordes a todos los laterales
         boton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 JFrame ventanaDificultades= new JFrame ("Niveles");
                 ventana.setVisible(false);
                 ventanaDificultades.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,10 +47,12 @@ public class MenuPrincipal {
                 JPanel parteCentral2 = new JPanel();
                 parteCentral2.setLayout(new BoxLayout(parteCentral2,BoxLayout.Y_AXIS)); //para que esten alineados en vertical
                 ventanaDificultades.getContentPane().add(parteCentral2, BorderLayout.CENTER);
-                parteCentral2.setBorder(BorderFactory.createEmptyBorder(230, 410, 20, 20));
+                parteCentral2.setBorder(BorderFactory.createEmptyBorder(230, 390, 20, 20));
 
                 JButton boton1=new JButton("Facil");
                 JButton boton2=new JButton("Dificil");
+                boton1.setFont(new Font("Arial", Font.BOLD, 26));
+                boton2.setFont(new Font("Arial", Font.BOLD, 26));
                 parteCentral2.add(boton1);
                 parteCentral2.add(Box.createRigidArea(new Dimension(0, 20))); // Añade un espacio en horizontal
                 parteCentral2.add(boton2);
@@ -61,6 +63,8 @@ public class MenuPrincipal {
                 ventanaDificultades.setVisible(true);
             }
         });
+
+        boton.setFont(new Font("Arial", Font.BOLD, 26)); // Set font style and size
         parteCentral.add(boton);
 
         ventana.setResizable(false); //para no poder modificar el tamaño de la pantalla
