@@ -1,4 +1,4 @@
-package ui.canva.prueba;
+package ui.canva;
 
 /**
  * @author Rodrigo
