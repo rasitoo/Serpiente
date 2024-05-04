@@ -41,11 +41,6 @@ public class PrincipalDemoCuadrado {
                 if (teclado.pulsada(KeyEvent.VK_RIGHT) && x < ventana.getAncho() - 1) x++;
                 if (teclado.pulsada(KeyEvent.VK_UP) && y > 0) y--;
                 if (teclado.pulsada(KeyEvent.VK_DOWN) && y < ventana.getAlto() - 1) y++;
-            } else {
-                if (teclado.pulsada1Vez(KeyEvent.VK_LEFT) && x > 0) dir = 0;
-                if (teclado.pulsada1Vez(KeyEvent.VK_RIGHT) && x < ventana.getAncho() - 1) dir = 2;
-                if (teclado.pulsada1Vez(KeyEvent.VK_UP) && y > 0) dir = 1;
-                if (teclado.pulsada1Vez(KeyEvent.VK_DOWN) && y < ventana.getAlto() - 1) dir = 3;
             }
 
             ventana.marcarPixel(x, y, Color.GRAY);

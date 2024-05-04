@@ -14,8 +14,8 @@ public class Fondo extends JPanel {
     public Fondo(int tammax, int can){
         this.tammax = tammax;
         this.can = can;
-        tam = tammax/can;
-        res = tammax%can;
+        this.tam = tammax/can;
+        this.res = tammax%can;
     }
     @Override
     public void paint(Graphics g){
@@ -23,7 +23,7 @@ public class Fondo extends JPanel {
         g.setColor(colorfondo); //pinta el fondo
         for (int x = 0; x < can; x++){
             for (int y = 0; y<can; y++){
-                g.fillRect(res/2+x*tam,res/2+y*tam,tam-1, tam-1); //pintará x lineas de y cuadrados en la posicion dada del bucle mas el residuo para que no haya espacio sin asignar, y el tamaño sera el correspondiente -1 para que se vea una linea, se puede quitar el -1 para que no haya linea
+                g.fillRect((res/2)+x*tam,(res/2)+y*tam,tam-1, tam-1); //pintará x lineas de y cuadrados en la posicion dada del bucle mas el residuo para que no haya espacio sin asignar, y el tamaño sera el correspondiente -1 para que se vea una linea, se puede quitar el -1 para que no haya linea
             }
         }
     }

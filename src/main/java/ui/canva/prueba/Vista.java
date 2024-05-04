@@ -1,6 +1,7 @@
 package ui.canva.prueba;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
 
 /**
  * @author Rodrigo
@@ -8,6 +9,8 @@ import javax.swing.*;
  */
 public class Vista extends JFrame {
     int ancho, alto;
+    Serpiente serpiente;
+    Fondo fondo;
 
     public Vista(String tituloVentana, int ancho, int alto) {
         super(tituloVentana);
@@ -18,14 +21,33 @@ public class Vista extends JFrame {
 
         this.setLocationRelativeTo(null); //ventana en el centro
 
-        Serpiente serpiente = new Serpiente(800, 20);
-        add(serpiente);
+        serpiente = new Serpiente(ancho, 30);
+        this.add(serpiente);
         serpiente.setBounds(10, 10, ancho, alto);
         serpiente.setOpaque(false);//El panel de la serpiente esta encima del fondo, por lo tanto debe ser transparente
 
-        Fondo fondo = new Fondo(800, 20); //El fondo sera de 800 pixeles dividido en 30 cuadrados
-        add(fondo);
+        fondo = new Fondo(ancho, 30); //El fondo sera de 800 pixeles dividido en 30 cuadrados
+        this.add(fondo);
         fondo.setBounds(10, 10, ancho, alto);
+
+        this.requestFocus(true);
+    }
+    private void tecla(KeyEvent event) {
+
+        switch (event.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                serpiente.setCambiodir("izq");
+                break;
+            case KeyEvent.VK_RIGHT:
+                serpiente.setCambiodir("der");
+                break;
+            case KeyEvent.VK_UP:
+                serpiente.setCambiodir("arr");
+                break;
+            case KeyEvent.VK_DOWN:
+                serpiente.setCambiodir("aba");
+                break;
+        }
     }
 
     /**
@@ -38,6 +60,11 @@ public class Vista extends JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tecla(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,6 +120,8 @@ public class Vista extends JFrame {
 
     // Variables declaration - do not modify
     // End of variables declaration
+
+
 }
 
 
