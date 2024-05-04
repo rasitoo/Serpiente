@@ -16,7 +16,13 @@ public class MenuPrincipal {
         ventana.setPreferredSize(new Dimension(900,600));
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        ImageIcon imagenFondo = new ImageIcon("C:\\Users\\paros\\IdeaProjects\\Serpiente\\FondoMenuPrincipal.jpg");
+        /*Estilo del cursor*/
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        ImageIcon icon = new ImageIcon("cursor3.jpeg");
+        Cursor cursor = tk.createCustomCursor(icon.getImage(), new Point(0, 0), "Cursor personalizado");
+        ventana.setCursor(cursor);
+
+        ImageIcon imagenFondo = new ImageIcon("/imagenes/fondo2.jpeg");
         JLabel fondo = new JLabel(imagenFondo);
         fondo.setSize(ventana.getContentPane().getSize());
         fondo.setOpaque(true);
@@ -63,7 +69,7 @@ public class MenuPrincipal {
                 ventanaDificultades.setVisible(true);
             }
         });
-
+        boton.setBackground(new Color(128, 70, 8));
         boton.setFont(new Font("Arial", Font.BOLD, 26)); // Set font style and size
         parteCentral.add(boton);
 
