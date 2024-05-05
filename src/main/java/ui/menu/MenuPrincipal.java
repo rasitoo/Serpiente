@@ -1,6 +1,7 @@
 package ui.menu;
 
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,54 +14,55 @@ public class MenuPrincipal {
     public static void main(String[] args) {
 
         JFrame ventana= new JFrame ("Menú");
-        ventana.setPreferredSize(new Dimension(900,600));
+        ventana.setPreferredSize(new Dimension(500,320));
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        /*Estilo del cursor*/
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        ImageIcon icon = new ImageIcon("cursor3.jpeg");
-        Cursor cursor = tk.createCustomCursor(icon.getImage(), new Point(0, 0), "Cursor personalizado");
-        ventana.setCursor(cursor);
-
-        ImageIcon imagenFondo = new ImageIcon("/imagenes/fondo2.jpeg");
+        ImageIcon imagenFondo = new ImageIcon("C:\\Users\\paros\\IdeaProjects\\Serpiente\\src\\main\\java\\imagenes\\fondo3.png");
         JLabel fondo = new JLabel(imagenFondo);
         fondo.setSize(ventana.getContentPane().getSize());
         fondo.setOpaque(true);
         ventana.getContentPane().add(fondo, BorderLayout.CENTER);
 
-        int maxGap = 20;
-        GridLayout experimentLayout = new GridLayout(1,1);
-
-        JPanel parteCentral = new JPanel();
-        parteCentral.setLayout(new FlowLayout(FlowLayout.CENTER));
-        parteCentral.setPreferredSize(new Dimension(150,50));
-
         JButton boton = new JButton("Jugar");
-        Dimension buttonSize = boton.getPreferredSize();
-        parteCentral.setPreferredSize(new Dimension((int) (buttonSize.getWidth() * 1.5) + maxGap,
-                (int) (buttonSize.getHeight() * 2.5) + maxGap * 2));
-        ventana.getContentPane().add(parteCentral, BorderLayout.CENTER);
-        parteCentral.setBorder(BorderFactory.createEmptyBorder(240, 20, 20, 20));//para poner bordes a todos los laterales
+
+        boton.setForeground(Color.BLACK); //color de las letras del boton
+        boton.setFont(new Font("Calibri", Font.BOLD, 28)); // Tipo de fuente y tamaño
+        boton.setBorder(BorderFactory.createMatteBorder(3, 3, 2, 2, Color.BLACK)); //borde del boton
+        boton.setPreferredSize(new Dimension(50,50));
+        ventana.getContentPane().add(boton, BorderLayout.SOUTH);
+
+        /*Estilo del cursor*/
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        ImageIcon icon = new ImageIcon("cursor1.png");
+        Cursor cursor = tk.createCustomCursor(icon.getImage(), new Point(0, 0), "Cursor personalizado");
+        ventana.setCursor(cursor);
+
+
         boton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 JFrame ventanaDificultades= new JFrame ("Niveles");
+                ventanaDificultades.setCursor(cursor);
                 ventana.setVisible(false);
                 ventanaDificultades.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                ventanaDificultades.setPreferredSize(new Dimension(900,600));
+                ventanaDificultades.setPreferredSize(new Dimension(500,320));
 
                 JPanel parteCentral2 = new JPanel();
                 parteCentral2.setLayout(new BoxLayout(parteCentral2,BoxLayout.Y_AXIS)); //para que esten alineados en vertical
                 ventanaDificultades.getContentPane().add(parteCentral2, BorderLayout.CENTER);
-                parteCentral2.setBorder(BorderFactory.createEmptyBorder(230, 390, 20, 20));
+                parteCentral2.setBorder(BorderFactory.createEmptyBorder(80, 200, 20, 20));
 
-                JButton boton1=new JButton("Facil");
-                JButton boton2=new JButton("Dificil");
-                boton1.setFont(new Font("Arial", Font.BOLD, 26));
-                boton2.setFont(new Font("Arial", Font.BOLD, 26));
+                JButton boton1=new JButton("  Fácil  ");
+                JButton boton2=new JButton(" Difícil ");
+                boton1.setForeground(Color.BLACK);
+                boton2.setForeground(Color.BLACK);
+                boton1.setFont(new Font("Calibri", Font.BOLD, 28));
+                boton2.setFont(new Font("Calibri", Font.BOLD, 28));
+                boton1.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
+                boton2.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
                 parteCentral2.add(boton1);
-                parteCentral2.add(Box.createRigidArea(new Dimension(0, 20))); // Añade un espacio en horizontal
+                parteCentral2.add(Box.createRigidArea(new Dimension(0, 40))); // Añade un espacio en horizontal
                 parteCentral2.add(boton2);
 
                 ventanaDificultades.getContentPane().add(parteCentral2);
@@ -69,9 +71,6 @@ public class MenuPrincipal {
                 ventanaDificultades.setVisible(true);
             }
         });
-        boton.setBackground(new Color(128, 70, 8));
-        boton.setFont(new Font("Arial", Font.BOLD, 26)); // Set font style and size
-        parteCentral.add(boton);
 
         ventana.setResizable(false); //para no poder modificar el tamaño de la pantalla
         ventana.pack();
