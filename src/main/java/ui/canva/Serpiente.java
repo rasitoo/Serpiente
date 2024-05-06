@@ -118,10 +118,15 @@ public class Serpiente extends JPanel {
         int y = (int) (Math.random() * can);
         for (int[] coordenada : serpiente) {
             if (coordenada[0] == x && coordenada[1] == y) {
-                generarComida();
+                ocupado = true;
+                break;
             }
         }
-        comida = new int[]{x, y};
+        if (ocupado) {
+            generarComida();
+        } else {
+            comida = new int[]{x, y};
+        }
     }
 
 }
