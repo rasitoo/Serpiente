@@ -21,31 +21,35 @@ public class Vista extends JFrame {
 
         this.setLocationRelativeTo(null); //ventana en el centro
 
-        serpiente = new Serpiente(ancho, 30);
+        serpiente = new Serpiente(ancho, 20);
         this.add(serpiente);
         serpiente.setBounds(10, 10, ancho, alto);
         serpiente.setOpaque(false);//El panel de la serpiente esta encima del fondo, por lo tanto debe ser transparente
 
-        fondo = new Fondo(ancho, 30); //El fondo sera de 800 pixeles dividido en 30 cuadrados
+        fondo = new Fondo(ancho, 20); //El fondo sera de 800 pixeles dividido en 30 cuadrados
         this.add(fondo);
         fondo.setBounds(10, 10, ancho, alto);
 
-        this.requestFocus(true);
     }
+
     private void tecla(KeyEvent event) {
 
         switch (event.getKeyCode()) {
             case KeyEvent.VK_LEFT:
-                serpiente.setCambiodir("izq");
+                if (!serpiente.getDir().equals("izq") && !serpiente.getDir().equals("der"))
+                    serpiente.setCambiodir("izq");
                 break;
             case KeyEvent.VK_RIGHT:
-                serpiente.setCambiodir("der");
+                if (!serpiente.getDir().equals("izq") && !serpiente.getDir().equals("der"))
+                    serpiente.setCambiodir("der");
                 break;
             case KeyEvent.VK_UP:
-                serpiente.setCambiodir("arr");
+                if (!serpiente.getDir().equals("arr") && !serpiente.getDir().equals("aba"))
+                    serpiente.setCambiodir("arr");
                 break;
             case KeyEvent.VK_DOWN:
-                serpiente.setCambiodir("aba");
+                if (!serpiente.getDir().equals("arr") && !serpiente.getDir().equals("aba"))
+                    serpiente.setCambiodir("aba");
                 break;
         }
     }
