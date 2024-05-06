@@ -3,11 +3,16 @@ package ui.menu;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Rodrigo
  */
-public class NewJFrame1 extends javax.swing.JPanel {
+public class NewJFrame1 extends JPanel {
 
     /**
      * Creates new form NewJFrame
@@ -25,33 +30,66 @@ public class NewJFrame1 extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        boton = new JButton();
 
-        setMaximumSize(new java.awt.Dimension(474, 263));
+        setMaximumSize(new Dimension(474, 263));
         setOpaque(false);
 
-        jButton1.setText("jButton1");
+        boton.setText("jButton1");
+        boton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+                JFrame ventanaDificultades= new JFrame ("Niveles");
+//                ventanaDificultades.setCursor(cursor);
+//                ventana.setVisible(false);
+                ventanaDificultades.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                ventanaDificultades.setPreferredSize(new Dimension(500,320));
+
+                JPanel parteCentral2 = new JPanel();
+                parteCentral2.setLayout(new BoxLayout(parteCentral2,BoxLayout.Y_AXIS)); //para que esten alineados en vertical
+                ventanaDificultades.getContentPane().add(parteCentral2, BorderLayout.CENTER);
+                parteCentral2.setBorder(BorderFactory.createEmptyBorder(80, 200, 20, 20));
+
+                JButton boton1=new JButton("  Fácil  ");
+                JButton boton2=new JButton(" Difícil ");
+                boton1.setForeground(Color.BLACK);
+                boton2.setForeground(Color.BLACK);
+                boton1.setFont(new Font("Calibri", Font.BOLD, 28));
+                boton2.setFont(new Font("Calibri", Font.BOLD, 28));
+                boton1.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
+                boton2.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
+                parteCentral2.add(boton1);
+                parteCentral2.add(Box.createRigidArea(new Dimension(0, 40))); // Añade un espacio en horizontal
+                parteCentral2.add(boton2);
+
+                ventanaDificultades.getContentPane().add(parteCentral2);
+                ventanaDificultades.setResizable(false);
+                ventanaDificultades.pack();
+                ventanaDificultades.setVisible(true);
+            }
+        });
+
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(156, 156, 156)
-                .addComponent(jButton1)
+                .addComponent(boton)
                 .addContainerGap(169, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(138, 138, 138)
-                .addComponent(jButton1)
+                .addComponent(boton)
                 .addContainerGap(139, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private JButton boton;
     // End of variables declaration//GEN-END:variables
 }
