@@ -61,7 +61,7 @@ public class Serpiente extends JPanel {
         super.paint(g); //Cuando pinta lo hace iniciando de nuevo, haciendo que se mueva, es decir, lo que estaba antes lo borra
         g.setColor(colorserpiente); //pinta el fondo
         for (int i = 0; i < serpiente.size(); i++) {
-            g.fillRect(res / 2 + serpiente.get(i)[0] * tam, res / 2 + serpiente.get(i)[1] * tam, tam - 1, tam - 1); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
+            g.fillRect(res / 2 + serpiente.get(i)[0] * tam, res / 2 + serpiente.get(i)[1] * tam, tam, tam); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
         }
 
         g.setColor(colorcomida);
@@ -96,6 +96,7 @@ public class Serpiente extends JPanel {
         for (int[] coordenada : serpiente) {
             if (coordenada[0] == nuevo[0] && coordenada[1] == nuevo[1]) {
                 choque = true;
+                mov.parar();
             }
         }
         if (choque) {
