@@ -12,21 +12,31 @@ public class Vista extends JFrame {
     Serpiente serpiente;
     Fondo fondo;
 
-    public Vista(String tituloVentana, int ancho, int alto) {
+    public Vista(String tituloVentana, int ancho, String dificultad) {
         super(tituloVentana);
         initComponents();
 
         this.ancho = ancho;
-        this.alto = alto;
+        this.alto = ancho;
+        this.setSize(ancho + 40, alto + 60);
 
         this.setLocationRelativeTo(null); //ventana en el centro
 
-        serpiente = new Serpiente(ancho, 20);
+        switch (dificultad) {
+            case "facil":
+                serpiente = new Serpiente(ancho, 20);
+                fondo = new Fondo(ancho, 20);
+                break;
+            case "dificil":
+                serpiente = new Serpiente(ancho, 10);
+                fondo = new Fondo(ancho, 10);
+                break;
+        }
         this.add(serpiente);
         serpiente.setBounds(10, 10, ancho, alto);
         serpiente.setOpaque(false);//El panel de la serpiente esta encima del fondo, por lo tanto debe ser transparente
 
-        fondo = new Fondo(ancho, 20); //El fondo sera de 800 pixeles dividido en 30 cuadrados
+         //El fondo sera de 800 pixeles dividido en 30 cuadrados
         this.add(fondo);
         fondo.setBounds(10, 10, ancho, alto);
 
@@ -74,11 +84,11 @@ public class Vista extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 828, Short.MAX_VALUE)
+                        .addGap(0, ancho, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 828, Short.MAX_VALUE)
+                        .addGap(0, alto, Short.MAX_VALUE)
         );
 
         pack();
@@ -114,7 +124,7 @@ public class Vista extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Vista vista = new Vista("Serpiente", 800, 800);
+                Vista vista = new Vista("Serpiente", 800, "facil");
 
                 vista.setVisible(true);
                 vista.setResizable(false);

@@ -16,7 +16,7 @@ public class Serpiente extends JPanel {
     Color colorcomida = Color.red;
     int tammax, tam, can, res; //tamaño maximo, tamaño cuadradito y cantidad de cuadraditos, tabien tenemos residuo, que es el resto de la division
     List<int[]> serpiente = new ArrayList<>(); //Un arraylist de longitud variable que contiene arrays de int con las coordenadas de la serpiente
-    int[] comida = new int[2]; //Habrá solo una comida por lo tanto con un array normal nos vale
+    int[] comida = new int[2]; //Habrá solo una comida, por lo tanto, con un array normal nos vale
     String dir = "der";
     String cambiodir = "der" ;
 
@@ -92,6 +92,14 @@ public class Serpiente extends JPanel {
                 y = ultimo[1] + 1;
                 break;
         }
+        if (x >= can)
+            x = 0;
+        if (x < 0)
+            x = can - 1;
+        if (y >= can)
+            y = 0;
+        if (y < 0)
+            y = can - 1;
         int[] nuevo = {x, y}; //Si queremos que al tocar el borde aparezca por el borde contrario poner Math.floorMod
         for (int[] coordenada : serpiente) {
             if (coordenada[0] == nuevo[0] && coordenada[1] == nuevo[1]) {

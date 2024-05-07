@@ -69,7 +69,15 @@ public class MenuPrincipal extends javax.swing.JFrame{
                 boton1.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e2) {
                         ventanaDificultades.setVisible(false);
-                        Vista v=new Vista("Juego de la serpiente", 800, 800);
+                        Vista v=new Vista("Juego de la serpiente (facil)", 500, "facil");
+                        v.setVisible(true);
+                        v.setResizable(false);
+                    }
+                });
+                boton2.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e3) {
+                        ventanaDificultades.setVisible(false);
+                        Vista v=new Vista("Juego de la serpiente (dificil)", 500, "dificil");
                         v.setVisible(true);
                         v.setResizable(false);
                     }
