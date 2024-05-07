@@ -22,7 +22,7 @@ public class MenuPrincipal extends javax.swing.JFrame{
         ventana.setPreferredSize(new Dimension(500,320));
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        ImageIcon imagenFondo = new ImageIcon("C:\\Users\\paros\\IdeaProjects\\Serpiente\\src\\main\\java\\imagenes\\fondo3.png");
+        ImageIcon imagenFondo = new ImageIcon(".\\src\\main\\java\\imagenes\\fondo3.png");
         JLabel fondo = new JLabel(imagenFondo);
         fondo.setSize(ventana.getContentPane().getSize());
         fondo.setOpaque(true);
@@ -51,7 +51,7 @@ public class MenuPrincipal extends javax.swing.JFrame{
                 ventanaDificultades.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 ventanaDificultades.setPreferredSize(new Dimension(500,320));
 
-                JLabel fondo = new JLabel(new ImageIcon("C:\\Users\\paros\\IdeaProjects\\Serpiente\\src\\main\\java\\imagenes\\fondo2.jpeg"));
+                JLabel fondo = new JLabel(new ImageIcon(".\\src\\main\\java\\imagenes\\fondo2.jpeg"));
                 fondo.setSize(ventanaDificultades.getContentPane().getSize());
                 fondo.setOpaque(true);
 
