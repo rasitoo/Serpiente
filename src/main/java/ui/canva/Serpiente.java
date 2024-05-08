@@ -94,13 +94,13 @@ public class Serpiente extends JPanel {
         }
         if (x >= can)
             x = 0;
-        if (x < 0)
+        else if (x < 0)
             x = can - 1;
-        if (y >= can)
+        else if (y >= can)
             y = 0;
-        if (y < 0)
+        else if (y < 0)
             y = can - 1;
-        int[] nuevo = {x, y}; //Si queremos que al tocar el borde aparezca por el borde contrario poner Math.floorMod
+        int[] nuevo = {x, y};
         for (int[] coordenada : serpiente) {
             if (coordenada[0] == nuevo[0] && coordenada[1] == nuevo[1]) {
                 choque = true;
