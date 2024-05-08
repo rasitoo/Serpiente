@@ -14,9 +14,11 @@ import java.util.List;
 public class Serpiente extends JPanel {
     Color colorserpiente = Color.blue;
     Color colorcomida = Color.red;
+    Color colorobstaculo = new Color(128,70, 8);
     int tammax, tam, can, res; //tamaño maximo, tamaño cuadradito y cantidad de cuadraditos, tabien tenemos residuo, que es el resto de la division
     List<int[]> serpiente = new ArrayList<>(); //Un arraylist de longitud variable que contiene arrays de int con las coordenadas de la serpiente
     int[] comida = new int[2]; //Habrá solo una comida, por lo tanto, con un array normal nos vale
+    int[] obstaculo = new int[2];
     String dir = "der";
     String cambiodir = "der" ;
 
@@ -50,6 +52,7 @@ public class Serpiente extends JPanel {
         serpiente.add(a);
         serpiente.add(b);
         generarComida();
+        generarObstaculo();
 
         mov = new Movimiento(this);
         hilo = new Thread(mov);
@@ -67,6 +70,8 @@ public class Serpiente extends JPanel {
         g.setColor(colorcomida);
         g.fillRect(res / 2 + comida[0] * tam, res / 2 + comida[1] * tam, tam - 1, tam - 1); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
 
+        g.setColor(colorobstaculo);
+        g.fillRect(res / 2 + obstaculo[0] * tam, res / 2 + obstaculo[1] * tam, tam - 1, tam - 1);
     }
 
     public void avanzar() {
@@ -106,6 +111,11 @@ public class Serpiente extends JPanel {
                 choque = true;
                 mov.parar();
             }
+
+            if (obstaculo[0] == nuevo[0] && obstaculo[1] == nuevo[1]) {
+                choque = true;
+                mov.parar();
+            }
         }
         if (choque) {
             JOptionPane.showMessageDialog(this, "Has perdido!!");
@@ -132,6 +142,23 @@ public class Serpiente extends JPanel {
         }
         if (ocupado) {
             generarComida();
+        } else {
+            comida = new int[]{x, y};
+        }
+    }
+
+    public void generarObstaculo() {
+        boolean ocupado = false;
+        int x = (int) (Math.random() * can);
+        int y = (int) (Math.random() * can);
+        for (int[] coordenada : serpiente) {
+            if (coordenada[0] == x && coordenada[1] == y) {
+                ocupado = true;
+                break;
+            }
+        }
+        if (ocupado) {
+            generarObstaculo();
         } else {
             comida = new int[]{x, y};
         }
