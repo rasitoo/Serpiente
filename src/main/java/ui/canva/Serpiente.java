@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author Rodrigo
@@ -19,6 +21,7 @@ public class Serpiente extends JPanel {
     List<int[]> serpiente = new ArrayList<>(); //Un arraylist de longitud variable que contiene arrays de int con las coordenadas de la serpiente
     int[] comida = new int[2]; //Habrá solo una comida, por lo tanto, con un array normal nos vale
     int[] obstaculo = new int[2];
+    int numCuadrados=(int)(Math.random()*3+1);
     String dir = "der";
     String cambiodir = "der" ;
 
@@ -72,6 +75,7 @@ public class Serpiente extends JPanel {
 
         g.setColor(colorobstaculo);
         g.fillRect(res / 2 + obstaculo[0] * tam, res / 2 + obstaculo[1] * tam, tam - 1, tam - 1);
+
     }
 
     public void avanzar() {
@@ -160,7 +164,17 @@ public class Serpiente extends JPanel {
         if (ocupado) {
             generarObstaculo();
         } else {
-            comida = new int[]{x, y};
+            obstaculo = new int[]{x, y};
+            // Add a timer to make the obstacle appear after 15 seconds
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    generarObstaculo();
+                    repaint(); // This will trigger the paint method to update the obstacle
+                }
+            };
+            Timer timer = new Timer();
+            timer.schedule(task, 5000); // 5000 is 5 seconds in milliseconds
         }
     }
 

@@ -124,7 +124,7 @@ public class Vista extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Vista vista = new Vista("Serpiente", 800, "facil");
+                Vista vista = new Vista("Serpiente", 600, "facil");
 
                 vista.setVisible(true);
                 vista.setResizable(false);
