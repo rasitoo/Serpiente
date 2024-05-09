@@ -14,6 +14,7 @@ import java.util.TimerTask;
  */
 
 public class Serpiente extends JPanel {
+    private final Vista vista;
     Color colorserpiente = new Color(15,158,13);
     Color colorcomida = new Color(207,16,16);
     Color colorobstaculo = new Color(83, 44, 3);
@@ -24,6 +25,7 @@ public class Serpiente extends JPanel {
     int numCuadrados;
     String dir = "der";
     String cambiodir = "der";
+    int puntuacion = 0;
 
     boolean choque = false;
     Thread hilo;
@@ -48,7 +50,8 @@ public class Serpiente extends JPanel {
         this.cambiodir = cambiodir;
     }
 
-    public Serpiente(int tammax, int can) {
+    public Serpiente(int tammax, int can, Vista vista) {
+        this.vista = vista;
         this.tammax = tammax;
         this.can = can;
         tam = tammax / can;
@@ -83,7 +86,6 @@ public class Serpiente extends JPanel {
                 g.setColor(colorserpiente.darker()); //pinta el fondo
             }
             g.fillRect(res / 2 + serpiente.get(i)[0] * tam, res / 2 + serpiente.get(i)[1] * tam, tam, tam); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
-
         }
 
         g.setColor(colorcomida);
@@ -95,7 +97,6 @@ public class Serpiente extends JPanel {
         }
 
     }
-
 
     public void avanzar() {
         this.dir = this.cambiodir; //Antes de avanzar pone la nueva direccion
@@ -139,7 +140,6 @@ public class Serpiente extends JPanel {
                     choque = true;
                 }
             }
-
         }
         if (choque) {
             mov.parar();
@@ -148,6 +148,8 @@ public class Serpiente extends JPanel {
             if (nuevo[0] == comida[0] && nuevo[1] == comida[1]) {
                 serpiente.add(nuevo);
                 generarComida();
+                puntuacion += 5;
+                vista.actualizarPuntuacion(puntuacion);
             } else {
                 serpiente.add(nuevo);
                 serpiente.remove(0);
@@ -184,9 +186,7 @@ public class Serpiente extends JPanel {
                     break;
                 }
             }
-            y++;
         }
-
         if (ocupado) {
             generarObstaculo();
         } else {

@@ -1,6 +1,7 @@
 package ui.canva;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
@@ -11,34 +12,49 @@ public class Vista extends JFrame {
     int ancho, alto;
     Serpiente serpiente;
     Fondo fondo;
+    JTextField puntuacion;
+
+    JPanel panelpuntuacion;
 
     public Vista(String tituloVentana, int ancho, String dificultad) {
         super(tituloVentana);
-        initComponents();
 
         this.ancho = ancho;
-        this.alto = ancho;
+        this.alto = ancho + 20;
         this.setSize(ancho + 40, alto + 60);
 
         this.setLocationRelativeTo(null); //ventana en el centro
 
         switch (dificultad) {
             case "facil":
-                serpiente = new Serpiente(ancho, 20);
+                serpiente = new Serpiente(ancho, 20, this);
                 fondo = new Fondo(ancho, 20);
                 break;
             case "dificil":
-                serpiente = new Serpiente(ancho, 10);
+                serpiente = new Serpiente(ancho, 10, this);
                 fondo = new Fondo(ancho, 10);
                 break;
         }
-        this.add(serpiente);
+
+        panelpuntuacion = new JPanel();
+
+        puntuacion = new JTextField(20);
+        puntuacion.setEditable(false);
+        puntuacion.setText("Puntuacion: 0");
+        puntuacion.setBackground(Color.white);
+        puntuacion.setForeground(Color.black);
+        puntuacion.setFont(new Font("Calibri", Font.BOLD, 15));
+        puntuacion.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
+        puntuacion.setFocusable(false);
+
+        panelpuntuacion.add(puntuacion);
+
         serpiente.setBounds(10, 10, ancho, alto);
         serpiente.setOpaque(false);//El panel de la serpiente esta encima del fondo, por lo tanto debe ser transparente
 
-         //El fondo sera de 800 pixeles dividido en 30 cuadrados
-        this.add(fondo);
         fondo.setBounds(10, 10, ancho, alto);
+        initComponents();
+
 
     }
 
@@ -64,6 +80,10 @@ public class Vista extends JFrame {
         }
     }
 
+    void actualizarPuntuacion(int puntuacion) {
+        this.puntuacion.setText("Puntuacion: " + puntuacion);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,14 +101,32 @@ public class Vista extends JFrame {
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, ancho, Short.MAX_VALUE)
+                        .addGap(ancho, ancho, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup())
+                        .addGap(ancho, ancho, Short.MAX_VALUE)
+                        .addComponent(serpiente)
+                        .addComponent(fondo)
+                        .addGroup(layout.createSequentialGroup())
+                        .addComponent(panelpuntuacion, GroupLayout.Alignment.CENTER)
+
+
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, alto, Short.MAX_VALUE)
+                        .addGap(ancho, alto, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup())
+                        .addGap(ancho, ancho, Short.MAX_VALUE)
+                        .addComponent(serpiente)
+                        .addComponent(fondo)
+                        .addGroup(layout.createSequentialGroup())
+                        .addComponent(panelpuntuacion, GroupLayout.Alignment.CENTER)
+
         );
 
         pack();
@@ -124,7 +162,7 @@ public class Vista extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Vista vista = new Vista("Serpiente", 600, "dificil");
+                Vista vista = new Vista("Serpiente", 500, "dificil");
 
                 vista.setVisible(true);
                 vista.setResizable(false);
@@ -134,8 +172,4 @@ public class Vista extends JFrame {
 
     // Variables declaration - do not modify
     // End of variables declaration
-
-
 }
-
-
