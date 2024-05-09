@@ -14,20 +14,23 @@ import java.util.TimerTask;
  */
 
 public class Serpiente extends JPanel {
-    Color colorserpiente = Color.blue;
-    Color colorcomida = Color.red;
-    Color colorobstaculo = new Color(128,70, 8);
+    Color colorserpiente = new Color(15,158,13);
+    Color colorcomida = new Color(207,16,16);
+    Color colorobstaculo = new Color(83, 44, 3);
     int tammax, tam, can, res; //tamaño maximo, tamaño cuadradito y cantidad de cuadraditos, tabien tenemos residuo, que es el resto de la division
     List<int[]> serpiente = new ArrayList<>(); //Un arraylist de longitud variable que contiene arrays de int con las coordenadas de la serpiente
     int[] comida = new int[2]; //Habrá solo una comida, por lo tanto, con un array normal nos vale
-    int[] obstaculo = new int[2];
-    int numCuadrados=(int)(Math.random()*3+1);
+    List<int[]> obstaculo = new ArrayList<>();
+    int numCuadrados;
     String dir = "der";
-    String cambiodir = "der" ;
+    String cambiodir = "der";
 
     boolean choque = false;
     Thread hilo;
     Movimiento mov;
+    Thread hilo1;
+
+    Obstaculo obstaculo1;
 
     public String getDir() {
         return dir;
@@ -60,23 +63,39 @@ public class Serpiente extends JPanel {
         mov = new Movimiento(this);
         hilo = new Thread(mov);
         hilo.start();
+
+        obstaculo1 = new Obstaculo(this);
+        hilo1 = new Thread(obstaculo1);
+        hilo1.start();
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g); //Cuando pinta lo hace iniciando de nuevo, haciendo que se mueva, es decir, lo que estaba antes lo borra
-        g.setColor(colorserpiente); //pinta el fondo
         for (int i = 0; i < serpiente.size(); i++) {
+            if(i==serpiente.size()-1) {
+                g.setColor(Color.lightGray);
+            }
+            else if (i %2 == 0){
+                g.setColor(colorserpiente); //pinta el fondo
+            }
+            else {
+                g.setColor(colorserpiente.darker()); //pinta el fondo
+            }
             g.fillRect(res / 2 + serpiente.get(i)[0] * tam, res / 2 + serpiente.get(i)[1] * tam, tam, tam); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
+
         }
 
         g.setColor(colorcomida);
         g.fillRect(res / 2 + comida[0] * tam, res / 2 + comida[1] * tam, tam - 1, tam - 1); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
 
         g.setColor(colorobstaculo);
-        g.fillRect(res / 2 + obstaculo[0] * tam, res / 2 + obstaculo[1] * tam, tam - 1, tam - 1);
+        for (int i = 0; i < numCuadrados; i++) {
+            g.fillRect(res / 2 + obstaculo.get(i)[0] * tam, res / 2 + obstaculo.get(i)[1] * tam, tam - 1, tam - 1); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
+        }
 
     }
+
 
     public void avanzar() {
         this.dir = this.cambiodir; //Antes de avanzar pone la nueva direccion
@@ -113,15 +132,17 @@ public class Serpiente extends JPanel {
         for (int[] coordenada : serpiente) {
             if (coordenada[0] == nuevo[0] && coordenada[1] == nuevo[1]) {
                 choque = true;
-                mov.parar();
             }
 
-            if (obstaculo[0] == nuevo[0] && obstaculo[1] == nuevo[1]) {
-                choque = true;
-                mov.parar();
+            for (int i = 0; i < numCuadrados; i++) {
+                if (obstaculo.get(i)[0] == nuevo[0] && obstaculo.get(i)[1] == nuevo[1]) {
+                    choque = true;
+                }
             }
+
         }
         if (choque) {
+            mov.parar();
             JOptionPane.showMessageDialog(this, "Has perdido!!");
         } else {
             if (nuevo[0] == comida[0] && nuevo[1] == comida[1]) {
@@ -153,28 +174,26 @@ public class Serpiente extends JPanel {
 
     public void generarObstaculo() {
         boolean ocupado = false;
+        numCuadrados = (int) (Math.random() * 3 + 1);
         int x = (int) (Math.random() * can);
         int y = (int) (Math.random() * can);
-        for (int[] coordenada : serpiente) {
-            if (coordenada[0] == x && coordenada[1] == y) {
-                ocupado = true;
-                break;
+        for (int i = 0; i < numCuadrados; i++) {
+            for (int[] coordenada : serpiente) {
+                if (coordenada[0] == x && coordenada[1] == y) {
+                    ocupado = true;
+                    break;
+                }
             }
+            y++;
         }
+
         if (ocupado) {
             generarObstaculo();
         } else {
-            obstaculo = new int[]{x, y};
-            // Add a timer to make the obstacle appear after 15 seconds
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    generarObstaculo();
-                    repaint(); // This will trigger the paint method to update the obstacle
-                }
-            };
-            Timer timer = new Timer();
-            timer.schedule(task, 5000); // 5000 is 5 seconds in milliseconds
+            obstaculo = new ArrayList<>();
+            obstaculo.add(new int[]{x, y});
+            obstaculo.add(new int[]{x, --y});
+            obstaculo.add(new int[]{x, --y});
         }
     }
 
