@@ -124,7 +124,7 @@ public class Serpiente extends JPanel {
                         break;
                     case "aba":
                         centerX+=tam/2;
-                        centerY+=  0;
+                        centerY+= 0;
                         startAngle = 180;
                         endAngle = 360;
                         break;
@@ -135,8 +135,9 @@ public class Serpiente extends JPanel {
                     int y = centerY - (int) (radius * Math.sin(Math.toRadians(angle)));
                     semiArc.addPoint(x, y);
                 }
-                g.fillPolygon(semiArc);
                 g.setColor(Color.lightGray);
+
+                g.fillPolygon(semiArc);
             }
             else if (i %2 == 0){
                 g.setColor(colorserpiente); //pinta el fondo
