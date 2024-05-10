@@ -21,7 +21,7 @@ public class Vista extends JFrame {
 
         this.ancho = ancho;
         this.alto = ancho + 20;
-        this.setSize(ancho + 40, alto + 60);
+        this.setSize(ancho + 40, alto + 40);
 
         this.setLocationRelativeTo(null); //ventana en el centro
 
@@ -37,6 +37,10 @@ public class Vista extends JFrame {
         }
 
         panelpuntuacion = new JPanel();
+        panelpuntuacion.setBounds(10, 10, ancho, alto);
+        JSeparator separator = new JSeparator();
+        separator.setSize(fondo.getSize());
+        panelpuntuacion.add(separator);
 
         puntuacion = new JTextField(20);
         puntuacion.setEditable(false);
@@ -46,8 +50,15 @@ public class Vista extends JFrame {
         puntuacion.setFont(new Font("Calibri", Font.BOLD, 15));
         puntuacion.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
         puntuacion.setFocusable(false);
+        puntuacion.setBounds(ancho, alto, puntuacion.getWidth(), puntuacion.getHeight());
+        serpiente.setBorder(BorderFactory.createCompoundBorder(
+                serpiente.getBorder(),
+                BorderFactory.createEmptyBorder(alto-20, 10, 0, 0)
+        ));
 
-        panelpuntuacion.add(puntuacion);
+
+
+        serpiente.add(puntuacion);
 
         serpiente.setBounds(10, 10, ancho, alto);
         serpiente.setOpaque(false);//El panel de la serpiente esta encima del fondo, por lo tanto debe ser transparente
@@ -113,7 +124,6 @@ public class Vista extends JFrame {
                         .addComponent(serpiente)
                         .addComponent(fondo)
                         .addGroup(layout.createSequentialGroup())
-                        .addComponent(panelpuntuacion, GroupLayout.Alignment.CENTER)
 
 
         );
@@ -125,9 +135,10 @@ public class Vista extends JFrame {
                         .addComponent(serpiente)
                         .addComponent(fondo)
                         .addGroup(layout.createSequentialGroup())
-                        .addComponent(panelpuntuacion, GroupLayout.Alignment.CENTER)
+                        .addGap(ancho, ancho, Short.MAX_VALUE)
 
         );
+        getContentPane().add(panelpuntuacion,BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>
