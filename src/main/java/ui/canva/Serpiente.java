@@ -17,6 +17,9 @@ public class Serpiente extends JPanel {
     Color colorcomida = new Color(207,16,16);
     Color colorobstaculo = new Color(83, 44, 3);
     Color colorfuturoobstaculo = new Color(83, 44, 3,120);
+    ImageIcon imgComida =new ImageIcon(".\\src\\main\\java\\imagenes\\manzana.png");
+    ImageIcon imgObst =new ImageIcon(".\\src\\main\\java\\imagenes\\barril-de-vino.png");
+
 
     int tammax, tam, can, res; //tamaño maximo, tamaño cuadradito y cantidad de cuadraditos, tabien tenemos residuo, que es el resto de la division
     List<int[]> serpiente = new ArrayList<>(); //Un arraylist de longitud variable que contiene arrays de int con las coordenadas de la serpiente
@@ -89,27 +92,72 @@ public class Serpiente extends JPanel {
         super.paint(g); //Cuando pinta lo hace iniciando de nuevo, haciendo que se mueva, es decir, lo que estaba antes lo borra
         for (int i = 0; i < serpiente.size(); i++) {
             if(i==serpiente.size()-1) {
+                // Create a semi-arc polygon
+                Polygon semiArc = new Polygon();
+
+                // Define the arc's radius
+                int radius = tam/2;
+                int centerX = res / 2 +serpiente.get(i)[0] * tam ;
+                int centerY = (int) (res / 2 + serpiente.get(i)[1] * tam);
+                int startAngle = 0;
+                int endAngle = 0;
+
+                // Define the arc's center
+                switch (dir){
+                    case "der":
+                        centerX+=0;
+                        centerY+=tam/2;
+                        startAngle = 270;
+                        endAngle = 450;
+                        break;
+                    case "izq":
+                        centerX+=tam;
+                        centerY+=tam/2;
+                        startAngle = 90;
+                        endAngle = 270;
+                        break;
+                    case "arr":
+                        centerX+=tam/2;
+                        centerY+=tam;
+                        startAngle = 0;
+                        endAngle = 180;
+                        break;
+                    case "aba":
+                        centerX+=tam/2;
+                        centerY+=  0;
+                        startAngle = 180;
+                        endAngle = 360;
+                        break;
+                }
+                // Add points for the semi-arc
+                for (int angle = startAngle; angle <= endAngle; angle++) {
+                    int x = centerX + (int) (radius * Math.cos(Math.toRadians(angle)));
+                    int y = centerY - (int) (radius * Math.sin(Math.toRadians(angle)));
+                    semiArc.addPoint(x, y);
+                }
+                g.fillPolygon(semiArc);
                 g.setColor(Color.lightGray);
             }
             else if (i %2 == 0){
                 g.setColor(colorserpiente); //pinta el fondo
+                g.fillRect(res / 2 + serpiente.get(i)[0] * tam, res / 2 + serpiente.get(i)[1] * tam, tam, tam); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
+
             }
             else {
                 g.setColor(colorserpiente.darker()); //pinta el fondo
-            }
-            g.fillRect(res / 2 + serpiente.get(i)[0] * tam, res / 2 + serpiente.get(i)[1] * tam, tam, tam); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
-        }
+                g.fillRect(res / 2 + serpiente.get(i)[0] * tam, res / 2 + serpiente.get(i)[1] * tam, tam, tam); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
 
-        g.setColor(colorcomida);
-        g.fillRect(res / 2 + comida[0] * tam, res / 2 + comida[1] * tam, tam - 1, tam - 1); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
+            }
+
+        }
+        g.drawImage(imgComida.getImage(),res / 2 + comida[0] * tam, res / 2 + comida[1] * tam, tam - 1, tam - 1, null);
 
         g.setColor(colorfuturoobstaculo);
         for (int i = 0; i < numFuturosCuadrados; i++) {
             g.fillRect(res / 2 + futuroobstaculo.get(i)[0] * tam, res / 2 + futuroobstaculo.get(i)[1] * tam, tam - 1, tam - 1); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
         }
-        g.setColor(colorobstaculo);
         for (int i = 0; i < numCuadrados; i++) {
-            g.fillRect(res / 2 + obstaculo.get(i)[0] * tam, res / 2 + obstaculo.get(i)[1] * tam, tam - 1, tam - 1); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
+            g.drawImage(imgObst.getImage(),res / 2 + obstaculo.get(i)[0] * tam, res / 2 + obstaculo.get(i)[1] * tam, tam - 1, tam - 1, null); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
         }
     }
 
