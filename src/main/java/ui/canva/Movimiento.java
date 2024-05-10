@@ -6,7 +6,16 @@ package ui.canva;
  */
 public class Movimiento implements Runnable {
     Serpiente serpiente;
-    static final int VELOCIDAD = 250; //Menos es mas velocidad
+
+    public int getVELOCIDAD() {
+        return VELOCIDAD;
+    }
+
+    public void setVELOCIDAD(int VELOCIDAD) {
+        this.VELOCIDAD = VELOCIDAD;
+    }
+
+    private int VELOCIDAD = 250; //Menos es mas velocidad
     boolean movimiento = true;
 
     public Movimiento(Serpiente serpiente) {

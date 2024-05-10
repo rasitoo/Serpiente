@@ -5,8 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * @author Rodrigo
@@ -34,11 +32,15 @@ public class Serpiente extends JPanel {
     int puntuacion = 0;
 
     boolean choque = false;
-    Thread hilo;
-    Movimiento mov;
-    Thread hilo1;
 
+    Thread movim;
+    Movimiento mov;
+
+    Thread obst;
     Obstaculo obstaculo1;
+
+    Thread acele;
+    Aceleracion aceleracion;
 
     public String getDir() {
         return dir;
@@ -70,12 +72,16 @@ public class Serpiente extends JPanel {
         generarObstaculo();
 
         mov = new Movimiento(this);
-        hilo = new Thread(mov);
-        hilo.start();
+        movim = new Thread(mov);
+        movim.start();
 
         obstaculo1 = new Obstaculo(this);
-        hilo1 = new Thread(obstaculo1);
-        hilo1.start();
+        obst = new Thread(obstaculo1);
+        obst.start();
+
+        aceleracion = new Aceleracion(mov);
+        acele = new Thread(aceleracion);
+        acele.start();
     }
 
     @Override
