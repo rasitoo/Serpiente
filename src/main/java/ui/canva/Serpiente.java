@@ -18,11 +18,17 @@ public class Serpiente extends JPanel {
     Color colorserpiente = new Color(15,158,13);
     Color colorcomida = new Color(207,16,16);
     Color colorobstaculo = new Color(83, 44, 3);
+    Color colorfuturoobstaculo = new Color(83, 44, 3,120);
+
     int tammax, tam, can, res; //tamaño maximo, tamaño cuadradito y cantidad de cuadraditos, tabien tenemos residuo, que es el resto de la division
     List<int[]> serpiente = new ArrayList<>(); //Un arraylist de longitud variable que contiene arrays de int con las coordenadas de la serpiente
     int[] comida = new int[2]; //Habrá solo una comida, por lo tanto, con un array normal nos vale
     List<int[]> obstaculo = new ArrayList<>();
+    List<int[]> futuroobstaculo = new ArrayList<>();
+
     int numCuadrados;
+    int numFuturosCuadrados;
+
     String dir = "der";
     String cambiodir = "der";
     int puntuacion = 0;
@@ -91,11 +97,14 @@ public class Serpiente extends JPanel {
         g.setColor(colorcomida);
         g.fillRect(res / 2 + comida[0] * tam, res / 2 + comida[1] * tam, tam - 1, tam - 1); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
 
+        g.setColor(colorfuturoobstaculo);
+        for (int i = 0; i < numFuturosCuadrados; i++) {
+            g.fillRect(res / 2 + futuroobstaculo.get(i)[0] * tam, res / 2 + futuroobstaculo.get(i)[1] * tam, tam - 1, tam - 1); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
+        }
         g.setColor(colorobstaculo);
         for (int i = 0; i < numCuadrados; i++) {
             g.fillRect(res / 2 + obstaculo.get(i)[0] * tam, res / 2 + obstaculo.get(i)[1] * tam, tam - 1, tam - 1); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
         }
-
     }
 
     public void avanzar() {
@@ -135,11 +144,12 @@ public class Serpiente extends JPanel {
                 choque = true;
             }
 
-            for (int i = 0; i < numCuadrados; i++) {
-                if (obstaculo.get(i)[0] == nuevo[0] && obstaculo.get(i)[1] == nuevo[1]) {
-                    choque = true;
+            if (!obstaculo.isEmpty())
+                for (int i = 0; i < numCuadrados; i++) {
+                    if (obstaculo.get(i)[0] == nuevo[0] && obstaculo.get(i)[1] == nuevo[1]) {
+                        choque = true;
+                    }
                 }
-            }
         }
         if (choque) {
             mov.parar();
@@ -176,12 +186,30 @@ public class Serpiente extends JPanel {
 
     public void generarObstaculo() {
         boolean ocupado = false;
-        numCuadrados = (int) (Math.random() * 3 + 1);
+        numCuadrados = numFuturosCuadrados;
+        numFuturosCuadrados = (int) (Math.random() * 3 + 1);
         int x = (int) (Math.random() * can);
         int y = (int) (Math.random() * can);
-        for (int i = 0; i < numCuadrados; i++) {
+        obstaculo = futuroobstaculo;
+        futuroobstaculo = new ArrayList<>();
+        futuroobstaculo.add(new int[]{x, y});
+        for (int i = 0; i < numFuturosCuadrados; i++){
+            x+=(int)(Math.random() *2);
+            y+=(int)(Math.random() *2);
+
+            if (x >= can)
+                x--;
+            else if (x < 0)
+                x++;
+            else if (y >= can)
+                y--;
+            else if (y < 0)
+                y++;
+            futuroobstaculo.add(new int[]{x , y});
+        }
+        for (int i = 0; i < numFuturosCuadrados; i++) {
             for (int[] coordenada : serpiente) {
-                if (coordenada[0] == x && coordenada[1] == y) {
+                if (coordenada[0] == futuroobstaculo.get(i)[0] && coordenada[1] == futuroobstaculo.get(i)[1]) {
                     ocupado = true;
                     break;
                 }
@@ -189,11 +217,6 @@ public class Serpiente extends JPanel {
         }
         if (ocupado) {
             generarObstaculo();
-        } else {
-            obstaculo = new ArrayList<>();
-            obstaculo.add(new int[]{x, y});
-            obstaculo.add(new int[]{x, --y});
-            obstaculo.add(new int[]{x, --y});
         }
     }
 
