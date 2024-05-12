@@ -2,15 +2,28 @@ package ui.canva;
 
 /**
  * @author Rodrigo
+ * @author Patricia
  * @date 10 mayo, 2024
  */
 public class Aceleracion implements Runnable {
+
+    /**
+     * Movimiento de la serpiente.
+     */
     Movimiento movimiento;
 
+    /**
+     * Constructor de la clase Aceleracion.
+     * @param movimiento La clase Movimiento que controla el movimiento de la serpiente.
+     */
     Aceleracion(Movimiento movimiento) {
         this.movimiento = movimiento;
     }
 
+    /**
+     * Método que se ejecuta cuando se inicia el hilo en el que va a acelerar durante 5s cada 20s
+     * y después volverá a su velocidad original
+     */
     @Override
     public void run() {
         try {

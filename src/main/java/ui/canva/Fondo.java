@@ -5,25 +5,61 @@ import java.awt.*;
 
 /**
  * @author Rodrigo
+ * @author Patricia
  * @date 01 mayo, 2024
  */
 public class Fondo extends JPanel {
-    Color colorfondo = Color.gray;
-    int tammax, tam,can, res; //tamaño maximo, tamaño cuadradito y cantidad de cuadraditos, tabien tenemos residuo, que es el resto de la division
 
-    public Fondo(int tammax, int can){
-        this.tammax = tammax;
+    /**
+     * El color de fondo.
+     */
+    private Color colorFondo = Color.gray;
+
+    /**
+     * El tamaño máximo.
+     */
+    private int tamMax;
+
+    /**
+     * El tamaño de los cuadrados.
+     */
+    private int tam;
+
+    /**
+     * El número de cuadrados.
+     */
+    private int can;
+
+    /**
+     * El resto de la división del tamaño máximo por el número de cuadrados.
+     */
+    private int res;
+
+    /**
+     * Constructor para la clase Fondo.
+     *
+     * @param tamMax el tamaño máximo
+     * @param can    el número de cuadrados
+     */
+    public Fondo(int tamMax, int can) {
+        this.tamMax = tamMax;
         this.can = can;
-        this.tam = tammax/can;
-        this.res = tammax%can;
+        this.tam = tamMax / can;
+        this.res = tamMax % can;
     }
+
+    /**
+     * Sobrescribe el método paint para dibujar el fondo.
+     *
+     * @param g el objeto Graphics para dibujar
+     */
     @Override
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         super.paint(g); //Cuando pinta lo hace iniciando de nuevo, haciendo que se mueva, es decir, lo que estaba antes lo borra
-        g.setColor(colorfondo); //pinta el fondo
-        for (int x = 0; x < can; x++){
-            for (int y = 0; y<can; y++){
-                g.fillRect((res/2)+x*tam,(res/2)+y*tam,tam-1, tam-1); //pintará x lineas de y cuadrados en la posicion dada del bucle mas el residuo para que no haya espacio sin asignar, y el tamaño sera el correspondiente -1 para que se vea una linea, se puede quitar el -1 para que no haya linea
+        g.setColor(colorFondo); //pinta el fondo
+        for (int x = 0; x < can; x++) {
+            for (int y = 0; y < can; y++) {
+                g.fillRect((res / 2) + x * tam, (res / 2) + y * tam, tam - 1, tam - 1); //pintará x líneas de y cuadrados en la posición dada del bucle más el residuo para que no haya espacio sin asignar, y el tamaño será el correspondiente -1 para que se vea una línea, se puede quitar el -1 para que no haya línea
             }
         }
     }

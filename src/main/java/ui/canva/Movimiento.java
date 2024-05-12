@@ -1,27 +1,44 @@
 package ui.canva;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * @author Rodrigo
+ * @author Patricia
  * @date 03 mayo, 2024
  */
 public class Movimiento implements Runnable {
-    Serpiente serpiente;
 
-    public int getVELOCIDAD() {
-        return VELOCIDAD;
-    }
+    /**
+     * La serpiente que se moverá.
+     */
+    private Serpiente serpiente;
 
-    public void setVELOCIDAD(int VELOCIDAD) {
-        this.VELOCIDAD = VELOCIDAD;
-    }
+    /**
+     * La velocidad de la serpiente en milisegundos.
+     * Menos valor es mayor velocidad.
+     */
+    private int VELOCIDAD = 250;
 
-    private int VELOCIDAD = 250; //Menos es mas velocidad
-    boolean movimiento = true;
+    /**
+     * Indica si el movimiento está activo.
+     */
+    private boolean movimiento = true;
 
+    /**
+     * Constructor para la clase Movimiento.
+     *
+     * @param serpiente la serpiente que se moverá
+     */
     public Movimiento(Serpiente serpiente) {
         this.serpiente = serpiente;
     }
 
+    /**
+     * Sobrescribe el método run para realizar el movimiento de la serpiente continuamente a una
+     * velocidad determinada.
+     */
     @Override
     public void run() {
         while (movimiento) {
@@ -33,9 +50,30 @@ public class Movimiento implements Runnable {
                 throw new RuntimeException(e);
             }
         }
-
     }
-    public void parar(){
+
+    /**
+     * Detiene el movimiento de la serpiente.
+     */
+    public void parar() {
         this.movimiento = false;
+    }
+
+    /**
+     * Establece la velocidad de la serpiente en milisegundos.
+     *
+     * @param VELOCIDAD la velocidad en milisegundos
+     */
+    public void setVELOCIDAD(int VELOCIDAD) {
+        this.VELOCIDAD = VELOCIDAD;
+    }
+
+    /**
+     * Obtiene la velocidad de la serpiente en milisegundos.
+     *
+     * @return la velocidad en milisegundos
+     */
+    public int getVELOCIDAD() {
+        return VELOCIDAD;
     }
 }

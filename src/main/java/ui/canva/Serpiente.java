@@ -8,58 +8,161 @@ import java.util.List;
 
 /**
  * @author Rodrigo
+ * @author Patricia
  * @date 01 mayo, 2024
  */
 
 public class Serpiente extends JPanel {
+    /**
+     * La vista que se utilizará para mostrar la serpiente y el tablero.
+     */
     private final Vista vista;
+
+    /**
+     * Color de la serpiente.
+     */
     Color colorserpiente = new Color(15,158,13);
-    Color colorcomida = new Color(207,16,16);
-    Color colorobstaculo = new Color(83, 44, 3);
+
+    /**
+     * Color de donde va a aprecer el futuro obstaculo
+     */
     Color colorfuturoobstaculo = new Color(83, 44, 3,120);
+
+    /**
+     * Imagen de la comida
+     */
     ImageIcon imgComida =new ImageIcon(".\\src\\main\\java\\imagenes\\manzana.png");
+
+    /**
+     * Imagen de los obstaculos
+     */
     ImageIcon imgObst =new ImageIcon(".\\src\\main\\java\\imagenes\\barril-de-vino.png");
 
 
+    /**
+     * Tamaño máximo
+     * Tamaño del cuadrado
+     * La cantidad de cuadrados en el tablero.
+     * Residuo, que el resto de la division
+     */
     int tammax, tam, can, res; //tamaño maximo, tamaño cuadradito y cantidad de cuadraditos, tabien tenemos residuo, que es el resto de la division
+
+    /**
+     * Lista donde se guardarán las coordenadas donde van a aparecer el cuerpo de la serpiente
+     */
     List<int[]> serpiente = new ArrayList<>(); //Un arraylist de longitud variable que contiene arrays de int con las coordenadas de la serpiente
+
+    /**
+     * Lista donde se guardarán las coordenadas donde va a aparecer la comida
+     */
     int[] comida = new int[2]; //Habrá solo una comida, por lo tanto, con un array normal nos vale
+
+    /**
+     * Lista donde se guardarán las coordenadas donde van a aparecer los objetos
+     */
     List<int[]> obstaculo = new ArrayList<>();
+
+    /**
+     * Lista donde se guardarán las coordenadas donde van a aparecer los futuros objetos
+     */
     List<int[]> futuroobstaculo = new ArrayList<>();
 
     int numCuadrados;
     int numFuturosCuadrados;
 
+    /**
+     * La dirección en la que se moverá la serpiente.
+     */
     String dir = "der";
+
+    /**
+     * La dirección a la que cambiará el movimiento la serpiente.
+     */
     String cambiodir = "der";
+
+    /**
+     * La puntuación actual.
+     */
     int puntuacion = 0;
 
+    /**
+     * El choque con un obstáculo.
+     */
     boolean choque = false;
 
+    /**
+     * Hilo donde se generará el movimiento de la serpiente.
+     */
     Thread movim;
+
+    /**
+     * El movimiento de la serpiente.
+     */
     Movimiento mov;
 
+    /**
+     * Hilo donde se generarán los obstaculos de la serpiente.
+     */
     Thread obst;
+
+    /**
+     * Generar los obstaculos de la serpiente.
+     */
     Obstaculo obstaculo1;
 
+    /**
+     * Hilo donde se generará la aceleración de la serpiente.
+     */
     Thread acele;
+
+    /**
+     * La aceleración de la serpiente.
+     */
     Aceleracion aceleracion;
 
+    /**
+     * Obtiene la velocidad de la serpiente en milisegundos.
+     *
+     * @return la direccion
+     */
     public String getDir() {
         return dir;
     }
 
+    /**
+     * Establece la velocidad de la serpiente en milisegundos.
+     *
+     * @param dir dirección del movimiento de la serpiente
+     */
     public void setDir(String dir) {
         this.dir = dir;
     }
 
+    /**
+     * Obtiene el cambio de direccion de la serpiente
+     *
+     * @return el cambio de direccion
+     */
     public String getCambiodir() {
         return cambiodir;
     }
 
+    /**
+     * Establece la velocidad de la serpiente en milisegundos.
+     *
+     * @param cambiodir dirección a la que cambiará el movimiento la serpiente
+     */
     public void setCambiodir(String cambiodir) {
         this.cambiodir = cambiodir;
     }
+
+    /**
+     * Constructor para la clase Serpiente.
+     *
+     * @param tammax el tamaño máximo.
+     * @param can    el número de cuadrados.
+     * @param vista   la vista que se utilizará para mostrar la serpiente y el tablero.
+     */
 
     public Serpiente(int tammax, int can, Vista vista) {
         this.vista = vista;
@@ -87,6 +190,9 @@ public class Serpiente extends JPanel {
         acele.start();
     }
 
+    /**
+     * Sobrescribe el método paint para dibujar la serpiente, el tablero, la comida y los obstaculos
+     */
     @Override
     public void paint(Graphics g) {
         super.paint(g); //Cuando pinta lo hace iniciando de nuevo, haciendo que se mueva, es decir, lo que estaba antes lo borra
@@ -102,7 +208,8 @@ public class Serpiente extends JPanel {
                 int startAngle = 0;
                 int endAngle = 0;
 
-                // Define the arc's center
+                // Para que cada vez que la serpiente cambie de direccion se gire el
+                // arco hacia esa direccion junto con el cuerpo
                 switch (dir){
                     case "der":
                         centerX+=0;
@@ -129,7 +236,7 @@ public class Serpiente extends JPanel {
                         endAngle = 360;
                         break;
                 }
-                // Add points for the semi-arc
+                //Para hacer un semiarco para la cabeza de la serpiente
                 for (int angle = startAngle; angle <= endAngle; angle++) {
                     int x = centerX + (int) (radius * Math.cos(Math.toRadians(angle)));
                     int y = centerY - (int) (radius * Math.sin(Math.toRadians(angle)));
@@ -162,6 +269,11 @@ public class Serpiente extends JPanel {
         }
     }
 
+    /**
+     * Método para que la serpiente avance, cambie de dirección cada vez que se pulsa una flecha,
+     * cuando el cuerpo de la serpiente se encuentre con un obstaculo se choque y
+     * se acabe la partida, que los obstaculos y la comida no aparezcan encima de la serpiente
+     */
     public void avanzar() {
         this.dir = this.cambiodir; //Antes de avanzar pone la nueva direccion
         int[] ultimo = serpiente.get((serpiente.size() - 1));
@@ -209,6 +321,7 @@ public class Serpiente extends JPanel {
         if (choque) {
             mov.parar();
             JOptionPane.showMessageDialog(this, "Has perdido!!");
+            vista.setVisible(false);
         } else {
             if (nuevo[0] == comida[0] && nuevo[1] == comida[1]) {
                 serpiente.add(nuevo);
@@ -222,6 +335,9 @@ public class Serpiente extends JPanel {
         }
     }
 
+    /**
+     * Método para que se genere la comida
+     */
     public void generarComida() {
         boolean ocupado = false;
         int x = (int) (Math.random() * can);
@@ -239,6 +355,10 @@ public class Serpiente extends JPanel {
         }
     }
 
+    /**
+     * Método para que se generen diferentes números de obstaculos y en diferentes posiciones
+     * además de mostrar donde van a aparecer los siguientes obstaculos
+     */
     public void generarObstaculo() {
         boolean ocupado = false;
         numCuadrados = numFuturosCuadrados;
