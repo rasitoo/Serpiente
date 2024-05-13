@@ -1,0 +1,107 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Serpiente <-- Obstaculo
+Serpiente <-- Aceleracion
+Serpiente <-- Movimiento
+Fondo --> Vista
+Serpiente --> Vista
+MenuPrincipal <-- Vista
+
+class Serpiente extends JPanel {
+    -private final Vista vista;
+    Color colorserpiente
+    Color colorfuturoobstaculo
+    ImageIcon imgComida
+    ImageIcon imgObst
+    int tammax
+    int tam
+    int can
+    int res
+    List<int[]> serpiente
+    int[] comida
+    List<int[]> obstaculo
+    List<int[]> futuroobstaculo
+    int numCuadrados
+    int numFuturosCuadrados
+    String dir
+    String cambiodir
+    int puntuacion
+    boolean choque
+    Thread movim
+    Movimiento mov
+    Thread obst
+    Obstaculo obstaculo1
+    Thread acele
+    Aceleracion aceleracion
+    String getDir()
+    void setDir(String)
+    String getCambiodir()
+    +public void setCambiodir(String cambiodir)
+    +public Serpiente(int tammax, int can, Vista vista)
+    +public void paint(Graphics g)
+    +public void avanzar()
+    +public void generarComida()
+    +public void generarObstaculo()
+
+}
+
+class Aceleracion implements Runnable {
+    Movimiento movimiento;
+    Aceleracion(Movimiento movimiento)
+    +public void run()
+}
+
+class Obstaculo implements Runnable {
+    -private Serpiente serpiente
+    -private boolean generar
+    +public Obstaculo(Serpiente serpiente)
+    +public void run()
+}
+
+class Movimiento implements Runnable {
+    -private Serpiente serpiente
+    -private int VELOCIDAD
+    -private boolean movimiento
+    +public Movimiento(Serpiente serpiente)
+    +public void run()
+    +public void parar()
+    +public void setVELOCIDAD(int VELOCIDAD)
+    +public int getVELOCIDAD()
+}
+
+class Fondo extends JPanel {
+    -private Color colorFondo
+    -private int tamMax
+    -private int tam
+    -private int can
+    -private int res
+    +public Fondo(int tamMax, int can)
+    +public void paint(Graphics g)
+}
+
+class Vista extends JFrame {
+    int ancho, alto
+    Serpiente serpiente
+    Fondo fondo
+    JTextField puntuacion
+    JPanel panelpuntuacion
+    +public Vista(String tituloVentana, int ancho, String dificultad)
+    -private void tecla(KeyEvent event)
+    void actualizarPuntuacion(int puntuacion)
+    -private void initComponents()
+    +public static void main(String args[])
+}
+
+class MenuPrincipal extends javax.swing.JFrame{
+    +public static void menu()
+    +public static void menuDificultades(JFrame ventana)
+    -private static JFrame crearVentana(String titulo, int ancho, int alto)
+    -private static void ponerImagenFondo(JFrame ventana, String imagePath)
+    -private static void ponerCursor(JFrame ventana)
+    -private static JButton crearBoton(String texto, int altura, Color colorLetra, Font estilo)
+    -private static void DificultadActionListeners(JFrame ventanaDificultades, JButton boton, JButton boton2)
+    +public static void main(String[] args)
+}
+
+@enduml
