@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 @Data
 public class SerpienteTest {
 
@@ -30,7 +32,7 @@ public class SerpienteTest {
         assertEquals(Color.decode("#159853"), serpiente.getColorserpiente());
         assertEquals(Color.decode("#83443"), serpiente.getColorfuturoobstaculo());
         assertEquals(0, serpiente.getPuntuacion());
-        assertFalse(serpiente.getChoque());
+        assertFalse(serpiente.isChoque());
         assertNull(serpiente.getMovim());
         assertNull(serpiente.getObstaculo1());
         assertNull(serpiente.getAceleracion());
@@ -61,7 +63,7 @@ public class SerpienteTest {
         serpiente.setSerpiente(new ArrayList<>(List.of(new int[]{0, 0}, new int[]{0, 1})));
         serpiente.setComida(new int[]{0, 0});
         serpiente.setObstaculo(new ArrayList<>(List.of(new int[]{0, 0})));
-        serpiente.setFuturoObstaculo(new ArrayList<>(List.of(new int[]{0, 0})));
+        serpiente.setFuturoobstaculo(new ArrayList<>(List.of(new int[]{0, 0})));
 
         // Call the avanzar method
         serpiente.avanzar();
@@ -71,7 +73,7 @@ public class SerpienteTest {
         assertEquals(new int[]{0, 1}, serpiente.getSerpiente().get(0));
         assertEquals(new int[]{0, 0}, serpiente.getComida());
         assertEquals(new int[]{0, 0}, serpiente.getObstaculo().get(0));
-        assertEquals(new int[]{0, 0}, serpiente.getFuturoObstaculo().get(0));
+        assertEquals(new int[]{0, 0}, serpiente.getFuturoobstaculo().get(0));
     }
 
     @Test
@@ -97,8 +99,8 @@ public class SerpienteTest {
         }
 
         // Verify that the future obstacles have been generated in a random position
-        assertTrue(serpiente.getFuturoObstaculo().size() >= 0 && serpiente.getFuturoObstaculo().size() <= 3);
-        for (int[] futuroObstaculo : serpiente.getFuturoObstaculo()) {
+        assertTrue(serpiente.getFuturoobstaculo().size() >= 0 && serpiente.getFuturoobstaculo().size() <= 3);
+        for (int[] futuroObstaculo : serpiente.getFuturoobstaculo()) {
             assertTrue(futuroObstaculo[0] >= 0 && futuroObstaculo[0] < 10);
             assertTrue(futuroObstaculo[1] >= 0 && futuroObstaculo[1] < 10);
         }

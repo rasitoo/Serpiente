@@ -1,6 +1,9 @@
 package ui.canva;
 
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,7 +13,8 @@ import java.util.List;
  * @author Rodrigo
  * @author Patricia
  */
-
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Serpiente extends JPanel {
     /**
      * La vista que se utilizará para mostrar la serpiente y el tablero.
