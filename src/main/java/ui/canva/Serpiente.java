@@ -416,6 +416,8 @@ public class Serpiente extends JPanel {
     /**
      * Método para que se generen diferentes números de obstaculos y en diferentes posiciones
      * además de mostrar donde van a aparecer los siguientes obstaculos
+     *
+     * @return
      */
     public void generarObstaculo() {
         boolean ocupado = false;
