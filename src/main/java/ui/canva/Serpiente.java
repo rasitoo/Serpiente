@@ -379,7 +379,6 @@ public class Serpiente extends JPanel {
         if (choque) {
             mov.parar();
             JOptionPane.showMessageDialog(this, "Has perdido!!");
-            vista.setVisible(false);
         } else {
             if (nuevo[0] == comida[0] && nuevo[1] == comida[1]) {
                 serpiente.add(nuevo);
