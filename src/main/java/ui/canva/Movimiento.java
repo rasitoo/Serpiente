@@ -1,15 +1,10 @@
 package ui.canva;
 
-import lombok.Data;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * @author Rodrigo
  * @author Patricia
  */
-@Data
 public class Movimiento implements Runnable {
 
     /**
@@ -27,6 +22,14 @@ public class Movimiento implements Runnable {
      * Indica si el movimiento está activo.
      */
     private boolean movimiento = true;
+
+    public int getVELOCIDAD() {
+        return VELOCIDAD;
+    }
+
+    public void setVELOCIDAD(int VELOCIDAD) {
+        this.VELOCIDAD = VELOCIDAD;
+    }
 
     /**
      * Constructor para la clase Movimiento.
@@ -59,23 +62,5 @@ public class Movimiento implements Runnable {
      */
     public void parar() {
         this.movimiento = false;
-    }
-
-    /**
-     * Establece la velocidad de la serpiente en milisegundos.
-     *
-     * @param VELOCIDAD la velocidad en milisegundos
-     */
-    public void setVELOCIDAD(int VELOCIDAD) {
-        this.VELOCIDAD = VELOCIDAD;
-    }
-
-    /**
-     * Obtiene la velocidad de la serpiente en milisegundos.
-     *
-     * @return la velocidad en milisegundos
-     */
-    public int getVELOCIDAD() {
-        return VELOCIDAD;
     }
 }

@@ -1,8 +1,5 @@
 package ui.canva;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -14,8 +11,6 @@ import java.awt.event.KeyEvent;
  * @author Rodrigo
  * @author Patricia
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
 public class Vista extends JFrame {
     /**
      * El ancho y alto de la ventana

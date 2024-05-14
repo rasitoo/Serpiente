@@ -1,9 +1,6 @@
 package ui.canva;
 
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,8 +10,7 @@ import java.util.List;
  * @author Rodrigo
  * @author Patricia
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
+
 public class Serpiente extends JPanel {
     /**
      * La vista que se utilizará para mostrar la serpiente y el tablero.
@@ -24,22 +20,22 @@ public class Serpiente extends JPanel {
     /**
      * Color de la serpiente.
      */
-    Color colorserpiente = new Color(15,158,13);
+    Color colorserpiente = new Color(15, 158, 13);
 
     /**
      * Color de donde va a aprecer el futuro obstaculo
      */
-    Color colorfuturoobstaculo = new Color(83, 44, 3,120);
+    Color colorfuturoobstaculo = new Color(83, 44, 3, 120);
 
     /**
      * Imagen de la comida
      */
-    ImageIcon imgComida =new ImageIcon(".\\src\\main\\java\\imagenes\\manzana.png");
+    ImageIcon imgComida = new ImageIcon(".\\src\\main\\java\\imagenes\\manzana.png");
 
     /**
      * Imagen de los obstaculos
      */
-    ImageIcon imgObst =new ImageIcon(".\\src\\main\\java\\imagenes\\barril-de-vino.png");
+    ImageIcon imgObst = new ImageIcon(".\\src\\main\\java\\imagenes\\barril-de-vino.png");
 
 
     /**
@@ -123,13 +119,110 @@ public class Serpiente extends JPanel {
      */
     Aceleracion aceleracion;
 
+    public Color getColorfuturoobstaculo() {
+        return colorfuturoobstaculo;
+    }
+
+
+    public Color getColorserpiente() {
+        return colorserpiente;
+    }
+
+    public Thread getMovim() {
+        return movim;
+    }
+
+
+    public Aceleracion getAceleracion() {
+        return aceleracion;
+    }
+
+
+    public Obstaculo getObstaculo1() {
+        return obstaculo1;
+    }
+
+
+    public boolean isChoque() {
+        return choque;
+    }
+
+    public int getPuntuacion() {
+        return puntuacion;
+    }
+
+    public int getNumFuturosCuadrados() {
+        return numFuturosCuadrados;
+    }
+
+
+    public int getCan() {
+        return can;
+    }
+
+
+    public int getTammax() {
+        return tammax;
+    }
+
+
+    public List<int[]> getSerpiente() {
+        return serpiente;
+    }
+
+    public void setSerpiente(List<int[]> serpiente) {
+        this.serpiente = serpiente;
+    }
+
+    public int[] getComida() {
+        return comida;
+    }
+
+    public void setComida(int[] comida) {
+        this.comida = comida;
+    }
+
+    public List<int[]> getObstaculo() {
+        return obstaculo;
+    }
+
+    public void setObstaculo(List<int[]> obstaculo) {
+        this.obstaculo = obstaculo;
+    }
+
+    public List<int[]> getFuturoobstaculo() {
+        return futuroobstaculo;
+    }
+
+    public void setFuturoobstaculo(List<int[]> futuroobstaculo) {
+        this.futuroobstaculo = futuroobstaculo;
+    }
+
+    public String getDir() {
+        return dir;
+    }
+
+    public void setDir(String dir) {
+        this.dir = dir;
+    }
+
+
+    public void setCambiodir(String cambiodir) {
+        this.cambiodir = cambiodir;
+    }
+
+    public Vista getVista() {
+        return vista;
+    }
+
     /**
      * Constructor para la clase Serpiente.
      *
      * @param tammax el tamaño máximo.
      * @param can    el número de cuadrados.
-     * @param vista   la vista que se utilizará para mostrar la serpiente y el tablero.
+     * @param vista  la vista que se utilizará para mostrar la serpiente y el tablero.
      */
+
 
     public Serpiente(int tammax, int can, Vista vista) {
         this.vista = vista;
@@ -164,41 +257,41 @@ public class Serpiente extends JPanel {
     public void paint(Graphics g) {
         super.paint(g); //Cuando pinta lo hace iniciando de nuevo, haciendo que se mueva, es decir, lo que estaba antes lo borra
         for (int i = 0; i < serpiente.size(); i++) {
-            if(i==serpiente.size()-1) {
+            if (i == serpiente.size() - 1) {
                 // Create a semi-arc polygon
                 Polygon semiArc = new Polygon();
 
                 // Define the arc's radius
-                int radius = tam/2;
-                int centerX = res / 2 +serpiente.get(i)[0] * tam ;
+                int radius = tam / 2;
+                int centerX = res / 2 + serpiente.get(i)[0] * tam;
                 int centerY = (int) (res / 2 + serpiente.get(i)[1] * tam);
                 int startAngle = 0;
                 int endAngle = 0;
 
                 // Para que cada vez que la serpiente cambie de direccion se gire el
                 // arco hacia esa direccion junto con el cuerpo
-                switch (dir){
+                switch (dir) {
                     case "der":
-                        centerX+=0;
-                        centerY+=tam/2;
+                        centerX += 0;
+                        centerY += tam / 2;
                         startAngle = 270;
                         endAngle = 450;
                         break;
                     case "izq":
-                        centerX+=tam;
-                        centerY+=tam/2;
+                        centerX += tam;
+                        centerY += tam / 2;
                         startAngle = 90;
                         endAngle = 270;
                         break;
                     case "arr":
-                        centerX+=tam/2;
-                        centerY+=tam;
+                        centerX += tam / 2;
+                        centerY += tam;
                         startAngle = 0;
                         endAngle = 180;
                         break;
                     case "aba":
-                        centerX+=tam/2;
-                        centerY+= 0;
+                        centerX += tam / 2;
+                        centerY += 0;
                         startAngle = 180;
                         endAngle = 360;
                         break;
@@ -212,27 +305,25 @@ public class Serpiente extends JPanel {
                 g.setColor(Color.lightGray);
 
                 g.fillPolygon(semiArc);
-            }
-            else if (i %2 == 0){
+            } else if (i % 2 == 0) {
                 g.setColor(colorserpiente); //pinta el fondo
                 g.fillRect(res / 2 + serpiente.get(i)[0] * tam, res / 2 + serpiente.get(i)[1] * tam, tam, tam); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
 
-            }
-            else {
+            } else {
                 g.setColor(colorserpiente.darker()); //pinta el fondo
                 g.fillRect(res / 2 + serpiente.get(i)[0] * tam, res / 2 + serpiente.get(i)[1] * tam, tam, tam); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
 
             }
 
         }
-        g.drawImage(imgComida.getImage(),res / 2 + comida[0] * tam, res / 2 + comida[1] * tam, tam - 1, tam - 1, null);
+        g.drawImage(imgComida.getImage(), res / 2 + comida[0] * tam, res / 2 + comida[1] * tam, tam - 1, tam - 1, null);
 
         g.setColor(colorfuturoobstaculo);
         for (int i = 0; i < numFuturosCuadrados; i++) {
             g.fillRect(res / 2 + futuroobstaculo.get(i)[0] * tam, res / 2 + futuroobstaculo.get(i)[1] * tam, tam - 1, tam - 1); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
         }
         for (int i = 0; i < numCuadrados; i++) {
-            g.drawImage(imgObst.getImage(),res / 2 + obstaculo.get(i)[0] * tam, res / 2 + obstaculo.get(i)[1] * tam, tam - 1, tam - 1, null); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
+            g.drawImage(imgObst.getImage(), res / 2 + obstaculo.get(i)[0] * tam, res / 2 + obstaculo.get(i)[1] * tam, tam - 1, tam - 1, null); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
         }
     }
 
@@ -335,9 +426,9 @@ public class Serpiente extends JPanel {
         obstaculo = futuroobstaculo;
         futuroobstaculo = new ArrayList<>();
         futuroobstaculo.add(new int[]{x, y});
-        for (int i = 0; i < numFuturosCuadrados; i++){
-            x+=(int)(Math.random() *2);
-            y+=(int)(Math.random() *2);
+        for (int i = 0; i < numFuturosCuadrados; i++) {
+            x += (int) (Math.random() * 2);
+            y += (int) (Math.random() * 2);
 
             if (x >= can)
                 x--;
@@ -347,7 +438,7 @@ public class Serpiente extends JPanel {
                 y--;
             else if (y < 0)
                 y++;
-            futuroobstaculo.add(new int[]{x , y});
+            futuroobstaculo.add(new int[]{x, y});
         }
         for (int i = 0; i < numFuturosCuadrados; i++) {
             for (int[] coordenada : serpiente) {

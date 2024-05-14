@@ -4,6 +4,7 @@ import ui.canva.Serpiente;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -69,10 +70,10 @@ public class SerpienteTest {
 
         // Verify that the serpiente's state has changed as expected
         assertEquals(2, serpiente.getSerpiente().size());
-        assertEquals(new int[]{0, 1}, serpiente.getSerpiente().get(0));
-        assertEquals(new int[]{0, 0}, serpiente.getComida());
-        assertEquals(new int[]{0, 0}, serpiente.getObstaculo().get(0));
-        assertEquals(new int[]{0, 0}, serpiente.getFuturoobstaculo().get(0));
+        assertArrayEquals(new int[]{0, 1}, serpiente.getSerpiente().get(0));
+        assertArrayEquals(new int[]{0, 0}, serpiente.getComida());
+        assertArrayEquals(new int[]{0, 0}, serpiente.getObstaculo().get(0));
+        assertArrayEquals(new int[]{0, 0}, serpiente.getObstaculo().get(0));
     }
 
     @Test
@@ -91,14 +92,14 @@ public class SerpienteTest {
         serpiente.generarObstaculo();
 
         // Verify that the obstaculos have been generated in a random position
-        assertTrue(serpiente.getObstaculo().size() >= 0 && serpiente.getObstaculo().size() <= 3);
+        assertTrue(serpiente.getObstaculo().size() > 0 && serpiente.getObstaculo().size() <= 3);
         for (int[] obstaculo : serpiente.getObstaculo()) {
             assertTrue(obstaculo[0] >= 0 && obstaculo[0] < 10);
             assertTrue(obstaculo[1] >= 0 && obstaculo[1] < 10);
         }
 
         // Verify that the future obstacles have been generated in a random position
-        assertTrue(serpiente.getFuturoobstaculo().size() >= 0 && serpiente.getFuturoobstaculo().size() <= 3);
+        assertTrue(serpiente.getFuturoobstaculo().size() > 0 && serpiente.getFuturoobstaculo().size() <= 3);
         for (int[] futuroObstaculo : serpiente.getFuturoobstaculo()) {
             assertTrue(futuroObstaculo[0] >= 0 && futuroObstaculo[0] < 10);
             assertTrue(futuroObstaculo[1] >= 0 && futuroObstaculo[1] < 10);
