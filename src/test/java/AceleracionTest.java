@@ -27,8 +27,8 @@ class AceleracionTest {
         }
 
         // Verify that the velocity has been halved after the initial 5-second sleep
-        float expectedVelocity = mockMovimiento.getVELOCIDAD() / 2;
-        float actualVelocity = mockMovimiento.getVELOCIDAD();
+        float expectedVelocity = mockMovimiento.getVelocidad() / 2;
+        float actualVelocity = mockMovimiento.getVelocidad();
         assertEquals(expectedVelocity, actualVelocity, "Velocity should be halved after 5 seconds");
 
         // Wait for the thread to complete its next 5-second sleep and velocity doubling
@@ -39,8 +39,8 @@ class AceleracionTest {
         }
 
         // Verify that the velocity has been doubled after the next 5-second sleep
-        expectedVelocity = mockMovimiento.getVELOCIDAD() * 2;
-        actualVelocity = mockMovimiento.getVELOCIDAD();
+        expectedVelocity = mockMovimiento.getVelocidad() * 2;
+        actualVelocity = mockMovimiento.getVelocidad();
         assertEquals(expectedVelocity, actualVelocity, "Velocity should be doubled after 5 seconds");
 
         // Wait for the thread to complete its random sleep duration
@@ -51,8 +51,8 @@ class AceleracionTest {
         }
 
         // Verify that the velocity has been updated again after the random sleep duration
-        expectedVelocity = mockMovimiento.getVELOCIDAD();
-        actualVelocity = mockMovimiento.getVELOCIDAD();
+        expectedVelocity = mockMovimiento.getVelocidad();
+        actualVelocity = mockMovimiento.getVelocidad();
         assertEquals(expectedVelocity, actualVelocity, "Velocity should be updated after the random sleep duration");
     }
 }

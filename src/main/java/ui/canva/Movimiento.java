@@ -16,19 +16,19 @@ public class Movimiento implements Runnable {
      * La velocidad de la serpiente en milisegundos.
      * Menos valor es mayor velocidad.
      */
-    private int VELOCIDAD = 250;
+    private int velocidad = 250;
 
     /**
      * Indica si el movimiento está activo.
      */
     private boolean movimiento = true;
 
-    public int getVELOCIDAD() {
-        return VELOCIDAD;
+    public int getVelocidad() {
+        return velocidad;
     }
 
-    public void setVELOCIDAD(int VELOCIDAD) {
-        this.VELOCIDAD = VELOCIDAD;
+    public void setVelocidad(int velocidad) {
+        this.velocidad = velocidad;
     }
 
     /**
@@ -50,7 +50,7 @@ public class Movimiento implements Runnable {
             serpiente.avanzar();
             serpiente.repaint();
             try {
-                Thread.sleep(VELOCIDAD);
+                Thread.sleep(velocidad);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

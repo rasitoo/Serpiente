@@ -33,10 +33,10 @@ public class Aceleracion implements Runnable {
             throw new RuntimeException(e);
         }
         while (true) {
-            movimiento.setVELOCIDAD((int) (movimiento.getVELOCIDAD() * 0.5));
+            movimiento.setVelocidad((int) (movimiento.getVelocidad() * 0.5));
             try {
                 Thread.sleep(5000);
-                movimiento.setVELOCIDAD(movimiento.getVELOCIDAD() * 2);
+                movimiento.setVelocidad(movimiento.getVelocidad() * 2);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

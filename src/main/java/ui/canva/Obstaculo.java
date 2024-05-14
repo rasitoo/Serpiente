@@ -26,10 +26,6 @@ public class Obstaculo implements Runnable {
         this.serpiente = serpiente;
     }
 
-    public boolean isGenerar() {
-        return generar;
-    }
-
     public void setGenerar(boolean generar) {
         this.generar = generar;
     }
