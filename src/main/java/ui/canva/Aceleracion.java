@@ -1,9 +1,12 @@
 package ui.canva;
 
+import lombok.Data;
+
 /**
  * @author Rodrigo
  * @author Patricia
  */
+@Data
 public class Aceleracion implements Runnable {
 
     /**
@@ -13,6 +16,7 @@ public class Aceleracion implements Runnable {
 
     /**
      * Constructor de la clase Aceleracion.
+     *
      * @param movimiento La clase Movimiento que controla el movimiento de la serpiente.
      */
     Aceleracion(Movimiento movimiento) {

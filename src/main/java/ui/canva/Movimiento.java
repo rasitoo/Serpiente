@@ -1,5 +1,7 @@
 package ui.canva;
 
+import lombok.Data;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -7,6 +9,7 @@ import java.util.TimerTask;
  * @author Rodrigo
  * @author Patricia
  */
+@Data
 public class Movimiento implements Runnable {
 
     /**

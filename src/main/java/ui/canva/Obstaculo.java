@@ -1,9 +1,12 @@
 package ui.canva;
 
+import lombok.Data;
+
 /**
  * @author Rodrigo
  * @author Patricia
  */
+@Data
 public class Obstaculo implements Runnable {
 
     /**

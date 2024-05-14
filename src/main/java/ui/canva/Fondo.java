@@ -1,5 +1,8 @@
 package ui.canva;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,6 +10,8 @@ import java.awt.*;
  * @author Rodrigo
  * @author Patricia
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Fondo extends JPanel {
 
     /**

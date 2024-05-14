@@ -1,16 +1,21 @@
 package ui.canva;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
- *
  * Clase que representa la ventana principal de la aplicacion de la serpiente.
  * Esta clase extiende de JFrame y contiene los componentes necesarios para la interfaz grafica.
+ *
  * @author Rodrigo
  * @author Patricia
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Vista extends JFrame {
     /**
      * El ancho y alto de la ventana
