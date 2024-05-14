@@ -19,7 +19,7 @@ public class Aceleracion implements Runnable {
      *
      * @param movimiento La clase Movimiento que controla el movimiento de la serpiente.
      */
-    Aceleracion(Movimiento movimiento) {
+    public Aceleracion(Movimiento movimiento) {
         this.movimiento = movimiento;
     }
 
