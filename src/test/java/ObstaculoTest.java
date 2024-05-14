@@ -28,7 +28,7 @@ class ObstaculoTest {
         }
 
         // Verify that an obstacle has been generated after the initial 5-second sleep
-        assertTrue(mockSerpiente.hasObstacle(), "An obstacle should have been generated after 5 seconds");
+        assertTrue(!mockSerpiente.getObstaculo().isEmpty(), "An obstacle should have been generated after 5 seconds");
 
         // Stop the Obstaculo thread
         obstaculo.setGenerar(false);
@@ -41,6 +41,6 @@ class ObstaculoTest {
         }
 
         // Verify that no more obstacles are generated after stopping the thread
-        assertFalse(mockSerpiente.hasObstacle(), "No more obstacles should be generated after stopping the thread");
+        assertFalse(!mockSerpiente.getObstaculo().isEmpty(), "No more obstacles should be generated after stopping the thread");
     }
 }

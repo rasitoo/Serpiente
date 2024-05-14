@@ -26,6 +26,14 @@ public class Obstaculo implements Runnable {
         this.serpiente = serpiente;
     }
 
+    public boolean isGenerar() {
+        return generar;
+    }
+
+    public void setGenerar(boolean generar) {
+        this.generar = generar;
+    }
+
     /**
      * Sobrescribe el método run para generar los obstáculos todo el rato cada 5 segundos.
      */
