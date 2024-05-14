@@ -124,42 +124,6 @@ public class Serpiente extends JPanel {
     Aceleracion aceleracion;
 
     /**
-     * Devuelve la dirección
-     *
-     * @return la dirección
-     */
-    public String getDir() {
-        return dir;
-    }
-
-    /**
-     * Cambia la dirección
-     *
-     * @param dir dirección del movimiento de la serpiente
-     */
-    public void setDir(String dir) {
-        this.dir = dir;
-    }
-
-    /**
-     * Obtiene el cambio de direccion de la serpiente
-     *
-     * @return el cambio de direccion
-     */
-    public String getCambiodir() {
-        return cambiodir;
-    }
-
-    /**
-     * Establece la velocidad de la serpiente en milisegundos.
-     *
-     * @param cambiodir dirección a la que cambiará el movimiento la serpiente
-     */
-    public void setCambiodir(String cambiodir) {
-        this.cambiodir = cambiodir;
-    }
-
-    /**
      * Constructor para la clase Serpiente.
      *
      * @param tammax el tamaño máximo.

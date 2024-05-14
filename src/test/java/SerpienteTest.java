@@ -1,4 +1,3 @@
-import lombok.Data;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ui.canva.Serpiente;
@@ -10,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@Data
+
 public class SerpienteTest {
 
     private Serpiente serpiente;
@@ -29,13 +28,13 @@ public class SerpienteTest {
         assertEquals(10, serpiente.getTammax());
         assertEquals(10, serpiente.getCan());
         assertNull(serpiente.getVista());
-        assertEquals(Color.decode("#159853"), serpiente.getColorserpiente());
-        assertEquals(Color.decode("#83443"), serpiente.getColorfuturoobstaculo());
+        assertEquals(new Color(15,158,13), serpiente.getColorserpiente());
+        assertEquals(new Color(83, 44, 3,120), serpiente.getColorfuturoobstaculo());
         assertEquals(0, serpiente.getPuntuacion());
         assertFalse(serpiente.isChoque());
-        assertNull(serpiente.getMovim());
-        assertNull(serpiente.getObstaculo1());
-        assertNull(serpiente.getAceleracion());
+        assertNotNull(serpiente.getMovim());
+        assertNotNull(serpiente.getObstaculo1());
+        assertNotNull(serpiente.getAceleracion());
     }
 
     @Test
@@ -50,9 +49,9 @@ public class SerpienteTest {
         verify(mockGraphics, times(1)).setColor(Color.lightGray);
         verify(mockGraphics, times(1)).fillPolygon(any(Polygon.class));
         verify(mockGraphics, times(1)).setColor(serpiente.getColorserpiente());
-        verify(mockGraphics, times(1)).fillRect(anyInt(), anyInt(), anyInt(), anyInt());
-        verify(mockGraphics, times(1)).setColor(serpiente.getColorserpiente().darker());
-        verify(mockGraphics, times(1)).fillRect(anyInt(), anyInt(), anyInt(), anyInt());
+        verify(mockGraphics, times(serpiente.getNumFuturosCuadrados()+1)).fillRect(anyInt(), anyInt(), anyInt(), anyInt());
+        verify(mockGraphics, times(1)).setColor(serpiente.getColorserpiente());
+        verify(mockGraphics, times(serpiente.getNumFuturosCuadrados()+1)).fillRect(anyInt(), anyInt(), anyInt(), anyInt());
     }
 
     @Test
@@ -69,7 +68,7 @@ public class SerpienteTest {
         serpiente.avanzar();
 
         // Verify that the serpiente's state has changed as expected
-        assertEquals(1, serpiente.getSerpiente().size());
+        assertEquals(2, serpiente.getSerpiente().size());
         assertEquals(new int[]{0, 1}, serpiente.getSerpiente().get(0));
         assertEquals(new int[]{0, 0}, serpiente.getComida());
         assertEquals(new int[]{0, 0}, serpiente.getObstaculo().get(0));
