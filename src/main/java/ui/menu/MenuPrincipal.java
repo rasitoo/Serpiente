@@ -7,25 +7,24 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 /**
+ * Clase que representa el menu principal de la aplicacion.
+ * Esta clase extiende de JFrame y contiene los componentes necesarios para la interfaz gráfica.
+ *
  * @author Rodrigo
  * @author Patricia
- * @date 01 mayo, 2024
  */
-
-/**
- * Clase que representa el menú principal de la aplicación.
- * Esta clase extiende de JFrame y contiene los componentes necesarios para la interfaz gráfica.
- */
-public class MenuPrincipal extends javax.swing.JFrame{
+public class MenuPrincipal extends javax.swing.JFrame {
 
     /**
-     * Método estático abre la ventana del menú principal
+     * Metodo estatico abre la ventana del menu principal
      */
 
     public static void menu() {
-        JFrame ventana = crearVentana("Menú", 500, 320);;
-        ventana.setPreferredSize(new Dimension(500,320));
+        JFrame ventana = crearVentana("Menú", 500, 320);
+        ;
+        ventana.setPreferredSize(new Dimension(500, 320));
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ponerImagenFondo(ventana, ".\\src\\main\\java\\imagenes\\fondo3.png");
         ponerCursor(ventana);
@@ -42,9 +41,9 @@ public class MenuPrincipal extends javax.swing.JFrame{
     }
 
     /**
-     * Método estático que muestra el menú de selección de niveles.
+     * Metodo estatico que muestra el menu de seleccion de niveles.
      *
-     * @param ventana la ventana principal de la aplicación.
+     * @param ventana la ventana principal de la aplicacion.
      */
     public static void menuDificultades(JFrame ventana) {
         ventana.setVisible(false);
@@ -61,11 +60,11 @@ public class MenuPrincipal extends javax.swing.JFrame{
     }
 
     /**
-     * Método estático que crea una ventana con un título y un tamaño específico.
+     * Metodo estatico que crea una ventana con un titulo y un tamano especifico.
      *
-     * @param titulo el título de la ventana.
-     * @param ancho el ancho de la ventana.
-     * @param alto el alto de la ventana.
+     * @param titulo el titulo de la ventana.
+     * @param ancho  el ancho de la ventana.
+     * @param alto   el alto de la ventana.
      * @return la ventana creada.
      */
     private static JFrame crearVentana(String titulo, int ancho, int alto) {
@@ -76,9 +75,9 @@ public class MenuPrincipal extends javax.swing.JFrame{
     }
 
     /**
-     * Método estático que pone una imagen de fondo en una ventana.
+     * Metodo estatico que pone una imagen de fondo en una ventana.
      *
-     * @param ventana la ventana en la que se pondrá la imagen de fondo.
+     * @param ventana   la ventana en la que se pondrá la imagen de fondo.
      * @param imagePath la ruta de la imagen de fondo.
      */
     private static void ponerImagenFondo(JFrame ventana, String imagePath) {
@@ -90,9 +89,9 @@ public class MenuPrincipal extends javax.swing.JFrame{
     }
 
     /**
-     * Método estático que establece el cursor personalizado en una ventana.
+     * Metodo estatico que establece el cursor personalizado en una ventana.
      *
-     * @param ventana la ventana en la que se establecerá el cursor personalizado.
+     * @param ventana la ventana en la que se establecera el cursor personalizado.
      */
     private static void ponerCursor(JFrame ventana) {
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -102,13 +101,13 @@ public class MenuPrincipal extends javax.swing.JFrame{
     }
 
     /**
-     * Método estático que crea un botón con un texto específico, un tamaño, un color de texto, y una fuente.
+     * Metodo estatico que crea un boton con un texto especifico, un tamano, un color de texto, y una fuente.
      *
-     * @param texto el texto que se mostrará en el botón.
-     * @param altura la altura del botón.
-     * @param colorLetra el color del texto en el botón.
-     * @param estilo la fuente que se utilizará para mostrar el texto en el botón.
-     * @return el botón creado.
+     * @param texto      el texto que se mostrara en el botón.
+     * @param altura     la altura del boton.
+     * @param colorLetra el color del texto en el boton.
+     * @param estilo     la fuente que se utilizara para mostrar el texto en el boton.
+     * @return el boton creado.
      */
     private static JButton crearBoton(String texto, int altura, Color colorLetra, Font estilo) {
         JButton button = new JButton(texto);
@@ -124,8 +123,8 @@ public class MenuPrincipal extends javax.swing.JFrame{
      * Método estático que establece los escuchadores de eventos para los botones de selección de nivel.
      *
      * @param ventanaDificultades la ventana en la que se establecerán los escuchadores de eventos.
-     * @param boton el botón de selección de nivel.
-     * @param boton2 el segundo botón de selección de nivel.
+     * @param boton               el botón de selección de nivel.
+     * @param boton2              el segundo botón de selección de nivel.
      */
     private static void DificultadActionListeners(JFrame ventanaDificultades, JButton boton, JButton boton2) {
         boton.addActionListener(new ActionListener() {

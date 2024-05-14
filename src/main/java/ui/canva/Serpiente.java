@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * @author Rodrigo
  * @author Patricia
- * @date 01 mayo, 2024
  */
 
 public class Serpiente extends JPanel {
@@ -121,16 +120,16 @@ public class Serpiente extends JPanel {
     Aceleracion aceleracion;
 
     /**
-     * Obtiene la velocidad de la serpiente en milisegundos.
+     * Devuelve la dirección
      *
-     * @return la direccion
+     * @return la dirección
      */
     public String getDir() {
         return dir;
     }
 
     /**
-     * Establece la velocidad de la serpiente en milisegundos.
+     * Cambia la dirección
      *
      * @param dir dirección del movimiento de la serpiente
      */

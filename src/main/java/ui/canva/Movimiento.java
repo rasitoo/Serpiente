@@ -6,7 +6,6 @@ import java.util.TimerTask;
 /**
  * @author Rodrigo
  * @author Patricia
- * @date 03 mayo, 2024
  */
 public class Movimiento implements Runnable {
 

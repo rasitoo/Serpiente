@@ -6,7 +6,6 @@ import java.awt.*;
 /**
  * @author Rodrigo
  * @author Patricia
- * @date 01 mayo, 2024
  */
 public class Fondo extends JPanel {
 

@@ -5,14 +5,11 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
+ *
+ * Clase que representa la ventana principal de la aplicacion de la serpiente.
+ * Esta clase extiende de JFrame y contiene los componentes necesarios para la interfaz grafica.
  * @author Rodrigo
  * @author Patricia
- * @date 01 mayo, 2024
- */
-
-/**
- * Clase que representa la ventana principal de la aplicación de la serpiente.
- * Esta clase extiende de JFrame y contiene los componentes necesarios para la interfaz gráfica.
  */
 public class Vista extends JFrame {
     /**
@@ -31,23 +28,18 @@ public class Vista extends JFrame {
     Fondo fondo;
 
     /**
-     * El lugar donde se va a mostrar la puntuación
+     * El lugar donde se va a mostrar la puntuacion
      */
     JTextField puntuacion;
 
     /**
-     * Panel donde va a aperecer la puntuación
-     */
-    JPanel panelpuntuacion;
-
-    /**
      * Constructor de la clase Vista.
      * Inicializa los componentes de la ventana y los parámetros necesarios para
-     * la ventana de la aplicación.
+     * la ventana de la aplicacion.
      *
-     * @param tituloVentana el título de la ventana.
-     * @param ancho el ancho de la ventana.
-     * @param dificultad la dificultad de la partida.
+     * @param tituloVentana el titulo de la ventana.
+     * @param ancho         el ancho de la ventana.
+     * @param dificultad    la dificultad de la partida.
      */
 
     public Vista(String tituloVentana, int ancho, String dificultad) {
@@ -70,12 +62,6 @@ public class Vista extends JFrame {
                 break;
         }
 
-        panelpuntuacion = new JPanel();
-        panelpuntuacion.setBounds(10, 10, ancho, alto);
-        JSeparator separator = new JSeparator();
-        separator.setSize(fondo.getSize());
-        panelpuntuacion.add(separator);
-
         puntuacion = new JTextField(20);
         puntuacion.setEditable(false);
         puntuacion.setText("Puntuacion: 0");
@@ -87,9 +73,8 @@ public class Vista extends JFrame {
         puntuacion.setBounds(ancho, alto, puntuacion.getWidth(), puntuacion.getHeight());
         serpiente.setBorder(BorderFactory.createCompoundBorder(
                 serpiente.getBorder(),
-                BorderFactory.createEmptyBorder(alto-20, 10, 0, 0)
+                BorderFactory.createEmptyBorder(alto - 20, 10, 0, 0)
         ));
-
 
 
         serpiente.add(puntuacion);
@@ -104,8 +89,8 @@ public class Vista extends JFrame {
     }
 
     /**
-     * Método que se llama cuando se presiona una tecla.
-     * Actualiza el movimiento de la serpiente en función de la tecla presionada.
+     * Metodo que se llama cuando se presiona una tecla.
+     * Actualiza el movimiento de la serpiente en funcion de la tecla presionada.
      *
      * @param event el evento de teclado.
      */
@@ -132,7 +117,7 @@ public class Vista extends JFrame {
     }
 
     /**
-     * Método que actualiza la puntuación en la interfaz gráfica.
+     * Metodo que actualiza la puntuacion en la interfaz grafica.
      *
      * @param puntuacion la puntuación actual.
      */
@@ -141,10 +126,10 @@ public class Vista extends JFrame {
     }
 
     /**
-     * Este método es llamado desde dentro del constructor para inicializar la ventana.
+     * Este metodo es llamado desde dentro del constructor para inicializar la ventana.
+     * Inicialmente generado por NetBeans, pero modificado para que añada margenes a la ventana, anadir todos los JPanel en el orden necesario y con el tamano necesario,
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -166,7 +151,6 @@ public class Vista extends JFrame {
                         .addGap(ancho, ancho, Short.MAX_VALUE)
                         .addComponent(serpiente)
                         .addComponent(fondo)
-                        .addGroup(layout.createSequentialGroup())
 
 
         );
@@ -177,19 +161,16 @@ public class Vista extends JFrame {
                         .addGap(ancho, ancho, Short.MAX_VALUE)
                         .addComponent(serpiente)
                         .addComponent(fondo)
-                        .addGroup(layout.createSequentialGroup())
-                        .addGap(ancho, ancho, Short.MAX_VALUE)
 
         );
-        getContentPane().add(panelpuntuacion,BorderLayout.SOUTH);
 
         pack();
-    }// </editor-fold>
+    }
 
     /**
-     * Método principal de la aplicación.
+     * Metodo principal de la aplicacion.
      *
-     * @param args los argumentos de la línea de comandos.
+     * @param args los argumentos de la linea de comandos.
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

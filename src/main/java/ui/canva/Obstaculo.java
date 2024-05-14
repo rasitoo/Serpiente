@@ -3,7 +3,6 @@ package ui.canva;
 /**
  * @author Rodrigo
  * @author Patricia
- * @date 03 mayo, 2024
  */
 public class Obstaculo implements Runnable {
 
