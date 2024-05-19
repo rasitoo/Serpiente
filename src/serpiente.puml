@@ -34,9 +34,27 @@ class Serpiente extends JPanel {
     Obstaculo obstaculo1
     Thread acele
     Aceleracion aceleracion
-    String getDir()
-    void setDir(String)
-    String getCambiodir()
+    +public Color getColorfuturoobstaculo()
+    +public Color getColorserpiente()
+    +public Thread getMovim()
+    +public Aceleracion getAceleracion()
+    +public Obstaculo getObstaculo1()
+    +public boolean isChoque()
+    +public int getPuntuacion()
+    +public int getNumFuturosCuadrados()
+    +public int getCan()
+    +public int getTammax()
+    +public List<int[]> getSerpiente()
+    +public void setSerpiente(List<int[]> serpiente)
+    +public int[] getComida()
+    +public void setComida(int[] comida)
+    +public List<int[]> getObstaculo()
+    +public void setObstaculo(List<int[]> obstaculo)
+    +public List<int[]> getFuturoobstaculo()
+    +public void setFuturoobstaculo(List<int[]> futuroobstaculo)
+    +public String getDir()
+    +public void setDir(String)
+    +public Vista getVista()
     +public void setCambiodir(String cambiodir)
     +public Serpiente(int tammax, int can, Vista vista)
     +public void paint(Graphics g)
@@ -55,6 +73,7 @@ class Aceleracion implements Runnable {
 class Obstaculo implements Runnable {
     -private Serpiente serpiente
     -private boolean generar
+    +public setGenerar(boolean generar))
     +public Obstaculo(Serpiente serpiente)
     +public void run()
 }
@@ -66,8 +85,8 @@ class Movimiento implements Runnable {
     +public Movimiento(Serpiente serpiente)
     +public void run()
     +public void parar()
-    +public void setVELOCIDAD(int VELOCIDAD)
-    +public int getVELOCIDAD()
+    +public void setVelocidad(int VELOCIDAD)
+    +public int getVelocidad()
 }
 
 class Fondo extends JPanel {

@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import ui.canva.Obstaculo;
 import ui.canva.Serpiente;
 

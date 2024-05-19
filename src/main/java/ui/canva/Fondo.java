@@ -34,6 +34,46 @@ public class Fondo extends JPanel {
      */
     private int res;
 
+    public Color getColorFondo() {
+        return colorFondo;
+    }
+
+    public void setColorFondo(Color colorFondo) {
+        this.colorFondo = colorFondo;
+    }
+
+    public int getTamMax() {
+        return tamMax;
+    }
+
+    public void setTamMax(int tamMax) {
+        this.tamMax = tamMax;
+    }
+
+    public int getTam() {
+        return tam;
+    }
+
+    public void setTam(int tam) {
+        this.tam = tam;
+    }
+
+    public int getCan() {
+        return can;
+    }
+
+    public void setCan(int can) {
+        this.can = can;
+    }
+
+    public int getRes() {
+        return res;
+    }
+
+    public void setRes(int res) {
+        this.res = res;
+    }
+
     /**
      * Constructor para la clase Fondo.
      *
