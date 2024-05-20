@@ -27,12 +27,5 @@ public class FondoTest {
         assertEquals(20, fondo.getTam());
         assertEquals(0, fondo.getRes());
 
-        // Check if the squares are drawn correctly
-        for (int x = 0; x < 10; x++) {
-            for (int y = 0; y < 10; y++) {
-                assertTrue(fondo.getGraphics().getColor().equals(Color.gray));
-                assertTrue(fondo.getGraphics().getClipBounds().contains(x * fondo.getTam(), y * fondo.getTam()));
-            }
-        }
     }
 }

@@ -1,6 +1,6 @@
 package ui.menu;
 
-import ui.canva.Vista;
+import ui.canva.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,13 +16,23 @@ import java.awt.event.ActionListener;
  * @author Patricia
  */
 public class MenuPrincipal extends javax.swing.JFrame {
+    JFrame ventana;
+
+    public JFrame getVentana() {
+        return ventana;
+    }
+
 
     /**
-     * Metodo estatico abre la ventana del menu principal
+     * @param titulo el titulo de la ventana.
+     *               <p>
+     *               <p>
+     *               Metodo estatico abre la ventana del menu principal
      */
 
-    public static void menu() {
-        JFrame ventana = crearVentana("Menú", 500, 320);
+    public MenuPrincipal(String titulo) {
+        super(titulo);
+        ventana = crearVentana(titulo, 500, 320);
         ;
         ventana.setPreferredSize(new Dimension(500, 320));
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,6 +46,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         ventana.getContentPane().add(boton, BorderLayout.SOUTH);
+        System.out.println(ventana.getContentPane().getComponentCount());
         ventana.pack();
         ventana.setVisible(true);
     }
@@ -147,7 +158,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      * @param args los argumentos de la línea de comandos.
      */
     public static void main(String[] args) {
-        menu();
+        new MenuPrincipal("menu");
         System.out.println("Se muestra la ventana ");
     }
 }
