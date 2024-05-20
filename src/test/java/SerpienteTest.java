@@ -92,14 +92,14 @@ public class SerpienteTest {
         serpiente.generarObstaculo();
 
         // Verify that the obstaculos have been generated in a random position
-        assertTrue(serpiente.getObstaculo().size() > 0 && serpiente.getObstaculo().size() <= 3);
+        assertTrue(!serpiente.getObstaculo().isEmpty() && serpiente.getObstaculo().size() <= 3);
         for (int[] obstaculo : serpiente.getObstaculo()) {
             assertTrue(obstaculo[0] >= 0 && obstaculo[0] < 10);
             assertTrue(obstaculo[1] >= 0 && obstaculo[1] < 10);
         }
 
         // Verify that the future obstacles have been generated in a random position
-        assertTrue(serpiente.getFuturoobstaculo().size() > 0 && serpiente.getFuturoobstaculo().size() <= 3);
+        assertTrue(!serpiente.getFuturoobstaculo().isEmpty() && serpiente.getFuturoobstaculo().size() <= 3);
         for (int[] futuroObstaculo : serpiente.getFuturoobstaculo()) {
             assertTrue(futuroObstaculo[0] >= 0 && futuroObstaculo[0] < 10);
             assertTrue(futuroObstaculo[1] >= 0 && futuroObstaculo[1] < 10);

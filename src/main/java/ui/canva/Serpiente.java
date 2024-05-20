@@ -225,7 +225,12 @@ public class Serpiente extends JPanel {
 
 
     public Serpiente(int tammax, int can, Vista vista) {
-        this.vista = vista;
+        Vista vista1;
+        vista1 = vista;
+        if (vista == null){
+            vista1 = vista;
+        }
+        this.vista = vista1;
         this.tammax = tammax;
         this.can = can;
         tam = tammax / can;
