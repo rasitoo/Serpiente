@@ -18,10 +18,8 @@ public class FondoTest {
         frame.setContentPane(fondo);
         frame.setVisible(true);
 
-        // Check if the background color is set correctly
         assertTrue(fondo.getColorFondo().equals(Color.gray));
 
-        // Check if the size and number of squares are set correctly
         assertEquals(200, fondo.getTamMax());
         assertEquals(10, fondo.getCan());
         assertEquals(20, fondo.getTam());
