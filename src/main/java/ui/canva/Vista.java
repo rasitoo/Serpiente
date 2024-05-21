@@ -1,8 +1,9 @@
 package ui.canva;
 
+import servicio.ServicioVista;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
 /**
  * Clase que representa la ventana principal de la aplicacion de la serpiente.
@@ -31,6 +32,11 @@ public class Vista extends JFrame {
      * El lugar donde se va a mostrar la puntuacion
      */
     JTextField puntuacion;
+
+    /**
+     * Objeto servicio que hara comprobaciones y calculos
+     */
+    ServicioVista servicio = new ServicioVista(this);
 
     /**
      * Constructor de la clase Vista.
@@ -88,40 +94,16 @@ public class Vista extends JFrame {
 
     }
 
-    /**
-     * Metodo que se llama cuando se presiona una tecla.
-     * Actualiza el movimiento de la serpiente en funcion de la tecla presionada.
-     *
-     * @param event el evento de teclado.
-     */
-    private void tecla(KeyEvent event) {
-
-        switch (event.getKeyCode()) {
-            case KeyEvent.VK_LEFT:
-                if (!serpiente.getDir().equals("izq") && !serpiente.getDir().equals("der"))
-                    serpiente.setCambiodir("izq");
-                break;
-            case KeyEvent.VK_RIGHT:
-                if (!serpiente.getDir().equals("izq") && !serpiente.getDir().equals("der"))
-                    serpiente.setCambiodir("der");
-                break;
-            case KeyEvent.VK_UP:
-                if (!serpiente.getDir().equals("arr") && !serpiente.getDir().equals("aba"))
-                    serpiente.setCambiodir("arr");
-                break;
-            case KeyEvent.VK_DOWN:
-                if (!serpiente.getDir().equals("arr") && !serpiente.getDir().equals("aba"))
-                    serpiente.setCambiodir("aba");
-                break;
-        }
+    public Serpiente getSerpiente() {
+        return serpiente;
     }
 
     /**
      * Metodo que actualiza la puntuacion en la interfaz grafica.
      *
-     * @param puntuacion la puntuación actual.
+     * @param puntuacion la puntuacion actual.
      */
-    void actualizarPuntuacion(int puntuacion) {
+    public void actualizarPuntuacion(int puntuacion) {
         this.puntuacion.setText("Puntuacion: " + puntuacion);
     }
 
@@ -135,7 +117,7 @@ public class Vista extends JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                tecla(evt);
+                servicio.tecla(evt);
             }
         });
 

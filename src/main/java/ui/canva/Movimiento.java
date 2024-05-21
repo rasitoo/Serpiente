@@ -2,13 +2,15 @@ package ui.canva;
 
 
 /**
+ * Clase en un hilo paralelo que se encarga del movimiento y velocidad de la serpiente
+ *
  * @author Rodrigo
  * @author Patricia
  */
 public class Movimiento implements Runnable {
 
     /**
-     * La serpiente que se moverá.
+     * La serpiente que se movera.
      */
     private Serpiente serpiente;
 
@@ -19,7 +21,7 @@ public class Movimiento implements Runnable {
     private int velocidad = 250;
 
     /**
-     * Indica si el movimiento está activo.
+     * Indica si el movimiento esta activo.
      */
     private boolean movimiento = true;
 
@@ -41,7 +43,7 @@ public class Movimiento implements Runnable {
     }
 
     /**
-     * Sobrescribe el método run para realizar el movimiento de la serpiente continuamente a una
+     * Sobrescribe el metodo run para realizar el movimiento de la serpiente continuamente a una
      * velocidad determinada.
      */
     @Override

@@ -1,123 +1,136 @@
 package ui.canva;
 
 
+import servicio.ServicioSerpiente;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Clase serpiente, se encarga de pintar las coordenadas de la serpiente, comida y obstaculos
+ *
  * @author Rodrigo
  * @author Patricia
  */
 
 public class Serpiente extends JPanel {
     /**
-     * La vista que se utilizará para mostrar la serpiente y el tablero.
+     * La vista que se utilizara para mostrar la serpiente y el tablero.
      */
     private final Vista vista;
 
     /**
      * Color de la serpiente.
      */
-    Color colorserpiente = new Color(15, 158, 13);
+    private Color colorserpiente = new Color(15, 158, 13);
 
     /**
-     * Color de donde va a aprecer el futuro obstaculo
+     * Color de donde va a aparecer el futuro obstaculo
      */
-    Color colorfuturoobstaculo = new Color(83, 44, 3, 120);
+    private Color colorfuturoobstaculo = new Color(83, 44, 3, 120);
 
     /**
      * Imagen de la comida
      */
-    ImageIcon imgComida = new ImageIcon(".\\src\\main\\java\\imagenes\\manzana.png");
+    private ImageIcon imgComida = new ImageIcon(".\\src\\main\\java\\imagenes\\manzana.png");
 
     /**
      * Imagen de los obstaculos
      */
-    ImageIcon imgObst = new ImageIcon(".\\src\\main\\java\\imagenes\\barril-de-vino.png");
+    private ImageIcon imgObst = new ImageIcon(".\\src\\main\\java\\imagenes\\barril-de-vino.png");
 
 
     /**
-     * Tamaño máximo
-     * Tamaño del cuadrado
+     * Tamano maximo
+     * Tamano del cuadrado
      * La cantidad de cuadrados en el tablero.
-     * Residuo, que el resto de la division
+     * Resto de la division
      */
-    int tammax, tam, can, res; //tamaño maximo, tamaño cuadradito y cantidad de cuadraditos, tabien tenemos residuo, que es el resto de la division
+    private int tammax, tam, can, res; //tamaño maximo, tamaño cuadradito y cantidad de cuadraditos, tabien tenemos el resto
 
     /**
-     * Lista donde se guardarán las coordenadas donde van a aparecer el cuerpo de la serpiente
+     * Lista donde se guardaran las coordenadas donde van a aparecer el cuerpo de la serpiente
      */
-    List<int[]> serpiente = new ArrayList<>(); //Un arraylist de longitud variable que contiene arrays de int con las coordenadas de la serpiente
+    private List<int[]> serpiente = new ArrayList<>(); //Un arraylist de longitud variable que contiene arrays de int con las coordenadas de la serpiente
 
     /**
-     * Lista donde se guardarán las coordenadas donde va a aparecer la comida
+     * Array donde se guardaran las coordenadas donde va a aparecer la comida
      */
-    int[] comida = new int[2]; //Habrá solo una comida, por lo tanto, con un array normal nos vale
+    private int[] comida = new int[2]; //Habrá solo una comida, por lo tanto, con un array normal nos vale
 
     /**
-     * Lista donde se guardarán las coordenadas donde van a aparecer los objetos
+     * Lista donde se guardaran las coordenadas donde van a aparecer los objetos
      */
-    List<int[]> obstaculo = new ArrayList<>();
+    private List<int[]> obstaculo = new ArrayList<>();
 
     /**
-     * Lista donde se guardarán las coordenadas donde van a aparecer los futuros objetos
+     * Lista donde se guardaran las coordenadas donde van a aparecer los futuros objetos
      */
-    List<int[]> futuroobstaculo = new ArrayList<>();
-
-    int numCuadrados;
-    int numFuturosCuadrados;
+    private List<int[]> futuroobstaculo = new ArrayList<>();
+    /**
+     * Numero de obstaculos que se van a generar.
+     */
+    private int numCuadrados;
 
     /**
-     * La dirección en la que se moverá la serpiente.
+     * El numero de futuros obstaculos que se generaran.
      */
-    String dir = "der";
+    private int numFuturosCuadrados;
+    /**
+     * La direccion en la que se movera la serpiente.
+     */
+    private String dir = "der";
 
     /**
-     * La dirección a la que cambiará el movimiento la serpiente.
+     * La direccion a la que cambiara el movimiento la serpiente.
      */
-    String cambiodir = "der";
+    private String cambiodir = "der";
 
     /**
-     * La puntuación actual.
+     * La puntuacion actual.
      */
-    int puntuacion = 0;
+    private int puntuacion = 0;
 
     /**
-     * El choque con un obstáculo.
+     * El choque con un obstaculo.
      */
-    boolean choque = false;
+    private boolean choque = false;
 
     /**
-     * Hilo donde se generará el movimiento de la serpiente.
+     * Hilo donde se generara el movimiento de la serpiente.
      */
-    Thread movim;
+    private Thread movim;
 
     /**
      * El movimiento de la serpiente.
      */
-    Movimiento mov;
+    private Movimiento mov;
 
     /**
-     * Hilo donde se generarán los obstaculos de la serpiente.
+     * Hilo donde se generaran los obstaculos de la serpiente.
      */
-    Thread obst;
+    private Thread obst;
 
     /**
      * Generar los obstaculos de la serpiente.
      */
-    Obstaculo obstaculo1;
+    private Obstaculo obstaculo1;
 
     /**
-     * Hilo donde se generará la aceleración de la serpiente.
+     * Hilo donde se generara la aceleracion de la serpiente.
      */
-    Thread acele;
+    private Thread acele;
 
     /**
-     * La aceleración de la serpiente.
+     * La aceleracion de la serpiente.
      */
-    Aceleracion aceleracion;
+    private Aceleracion aceleracion;
+    /**
+     * Objeto que hara comprobaciones y calculos
+     */
+    private ServicioSerpiente servicio = new ServicioSerpiente(this);
 
     public Color getColorfuturoobstaculo() {
         return colorfuturoobstaculo;
@@ -132,6 +145,13 @@ public class Serpiente extends JPanel {
         return movim;
     }
 
+    public Movimiento getMov() {
+        return mov;
+    }
+
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
+    }
 
     public Aceleracion getAceleracion() {
         return aceleracion;
@@ -147,6 +167,10 @@ public class Serpiente extends JPanel {
         return choque;
     }
 
+    public void setChoque(boolean choque) {
+        this.choque = choque;
+    }
+
     public int getPuntuacion() {
         return puntuacion;
     }
@@ -155,6 +179,9 @@ public class Serpiente extends JPanel {
         return numFuturosCuadrados;
     }
 
+    public int getNumCuadrados() {
+        return numCuadrados;
+    }
 
     public int getCan() {
         return can;
@@ -218,29 +245,23 @@ public class Serpiente extends JPanel {
     /**
      * Constructor para la clase Serpiente.
      *
-     * @param tammax el tamaño máximo.
-     * @param can    el número de cuadrados.
-     * @param vista  la vista que se utilizará para mostrar la serpiente y el tablero.
+     * @param tammax el tamano maximo.
+     * @param can    el numero de cuadrados.
+     * @param vista  la vista que se utilizara para mostrar la serpiente y el tablero.
      */
 
 
     public Serpiente(int tammax, int can, Vista vista) {
-        Vista vista1;
-        vista1 = vista;
-        if (vista == null){
-            vista1 = vista;
-        }
-        this.vista = vista1;
+        this.vista = vista;
         this.tammax = tammax;
         this.can = can;
         tam = tammax / can;
         res = tammax % can;
-        int[] a = {can / 2, can / 2}; //Primera coordenada en el centro del tablero, sera la cabeza
-        int[] b = {can / 2, can / 2 - 1}; //Segunda coordenada al lado para que no parezca un huevo
+        int[] a = {can / 2, can / 2};
+        int[] b = {can / 2, can / 2 - 1};
         serpiente.add(a);
         serpiente.add(b);
         generarComida();
-        generarObstaculo();
 
         mov = new Movimiento(this);
         movim = new Thread(mov);
@@ -256,60 +277,16 @@ public class Serpiente extends JPanel {
     }
 
     /**
-     * Sobrescribe el método paint para dibujar la serpiente, el tablero, la comida y los obstaculos
+     * Sobrescribe el metodo paint para dibujar la serpiente, la comida y los obstaculos
      */
     @Override
     public void paint(Graphics g) {
         super.paint(g); //Cuando pinta lo hace iniciando de nuevo, haciendo que se mueva, es decir, lo que estaba antes lo borra
         for (int i = 0; i < serpiente.size(); i++) {
             if (i == serpiente.size() - 1) {
-                // Create a semi-arc polygon
-                Polygon semiArc = new Polygon();
-
-                // Define the arc's radius
-                int radius = tam / 2;
-                int centerX = res / 2 + serpiente.get(i)[0] * tam;
-                int centerY = (int) (res / 2 + serpiente.get(i)[1] * tam);
-                int startAngle = 0;
-                int endAngle = 0;
-
-                // Para que cada vez que la serpiente cambie de direccion se gire el
-                // arco hacia esa direccion junto con el cuerpo
-                switch (dir) {
-                    case "der":
-                        centerX += 0;
-                        centerY += tam / 2;
-                        startAngle = 270;
-                        endAngle = 450;
-                        break;
-                    case "izq":
-                        centerX += tam;
-                        centerY += tam / 2;
-                        startAngle = 90;
-                        endAngle = 270;
-                        break;
-                    case "arr":
-                        centerX += tam / 2;
-                        centerY += tam;
-                        startAngle = 0;
-                        endAngle = 180;
-                        break;
-                    case "aba":
-                        centerX += tam / 2;
-                        centerY += 0;
-                        startAngle = 180;
-                        endAngle = 360;
-                        break;
-                }
-                //Para hacer un semiarco para la cabeza de la serpiente
-                for (int angle = startAngle; angle <= endAngle; angle++) {
-                    int x = centerX + (int) (radius * Math.cos(Math.toRadians(angle)));
-                    int y = centerY - (int) (radius * Math.sin(Math.toRadians(angle)));
-                    semiArc.addPoint(x, y);
-                }
+                Polygon cabeza = crearCabeza(i);
                 g.setColor(Color.lightGray);
-
-                g.fillPolygon(semiArc);
+                g.fillPolygon(cabeza);
             } else if (i % 2 == 0) {
                 g.setColor(colorserpiente); //pinta el fondo
                 g.fillRect(res / 2 + serpiente.get(i)[0] * tam, res / 2 + serpiente.get(i)[1] * tam, tam, tam); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
@@ -325,92 +302,85 @@ public class Serpiente extends JPanel {
 
         g.setColor(colorfuturoobstaculo);
         for (int i = 0; i < numFuturosCuadrados; i++) {
-            g.fillRect(res / 2 + futuroobstaculo.get(i)[0] * tam, res / 2 + futuroobstaculo.get(i)[1] * tam, tam - 1, tam - 1); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
+            g.fillRect(res / 2 + futuroobstaculo.get(i)[0] * tam, res / 2 + futuroobstaculo.get(i)[1] * tam, tam - 1, tam - 1);
         }
         for (int i = 0; i < numCuadrados; i++) {
-            g.drawImage(imgObst.getImage(), res / 2 + obstaculo.get(i)[0] * tam, res / 2 + obstaculo.get(i)[1] * tam, tam - 1, tam - 1, null); //en el list serpiente tenemos las coordenadas, entonces este bucle pinta las coordenadas correspondientes
+            g.drawImage(imgObst.getImage(), res / 2 + obstaculo.get(i)[0] * tam, res / 2 + obstaculo.get(i)[1] * tam, tam - 1, tam - 1, null);
         }
     }
 
     /**
-     * Método para que la serpiente avance, cambie de dirección cada vez que se pulsa una flecha,
+     * Crea un arco semicircular para la cabeza de la serpiente.
+     *
+     * @param i Indice de la parte del cuerpo de la serpiente
+     * @return Un objeto Polygon que representa el arco semicircular de la cabeza
+     */
+    private Polygon crearCabeza(int i) {
+        Polygon semiArc = new Polygon();
+
+        int radio = tam / 2;
+        int centroX = res / 2 + serpiente.get(i)[0] * tam;
+        int centroY = (int) (res / 2 + serpiente.get(i)[1] * tam);
+        int anguloInicial = 0;
+        int anguloFinal = 0;
+
+        // Determina los angulos inicial y final del arco semicircular según la dirección actual de la serpiente
+        switch (dir) {
+            case "der":
+                centroX += 0;
+                centroY += tam / 2;
+                anguloInicial = 270;
+                anguloFinal = 450;
+                break;
+            case "izq":
+                centroX += tam;
+                centroY += tam / 2;
+                anguloInicial = 90;
+                anguloFinal = 270;
+                break;
+            case "arr":
+                centroX += tam / 2;
+                centroY += tam;
+                anguloInicial = 0;
+                anguloFinal = 180;
+                break;
+            case "aba":
+                centroX += tam / 2;
+                centroY += 0;
+                anguloInicial = 180;
+                anguloFinal = 360;
+                break;
+        }
+        // Crea un arco semicircular añadiendo puntos al objeto Polygon según el centro, radio y ángulos calculados
+        for (int angulo = anguloInicial; angulo <= anguloFinal; angulo++) {
+            int x = centroX + (int) (radio * Math.cos(Math.toRadians(angulo)));
+            int y = centroY - (int) (radio * Math.sin(Math.toRadians(angulo)));
+            semiArc.addPoint(x, y);
+        }
+        return semiArc;
+    }
+
+
+    /**
+     * Metodo para que la serpiente avance, cambie de direccion cada vez que se pulsa una flecha,
      * cuando el cuerpo de la serpiente se encuentre con un obstaculo se choque y
      * se acabe la partida, que los obstaculos y la comida no aparezcan encima de la serpiente
      */
     public void avanzar() {
         this.dir = this.cambiodir; //Antes de avanzar pone la nueva direccion
         int[] ultimo = serpiente.get((serpiente.size() - 1));
-        int x = 0;
-        int y = 0;
-        switch (dir) {
-            case "der":
-                x = ultimo[0] + 1;
-                y = ultimo[1];
-                break;
-            case "izq":
-                x = ultimo[0] - 1;
-                y = ultimo[1];
-                break;
-            case "arr":
-                x = ultimo[0];
-                y = ultimo[1] - 1;
-                break;
-            case "aba":
-                x = ultimo[0];
-                y = ultimo[1] + 1;
-                break;
-        }
-        if (x >= can)
-            x = 0;
-        else if (x < 0)
-            x = can - 1;
-        else if (y >= can)
-            y = 0;
-        else if (y < 0)
-            y = can - 1;
-        int[] nuevo = {x, y};
-        for (int[] coordenada : serpiente) {
-            if (coordenada[0] == nuevo[0] && coordenada[1] == nuevo[1]) {
-                choque = true;
-            }
-
-            if (!obstaculo.isEmpty())
-                for (int i = 0; i < numCuadrados; i++) {
-                    if (obstaculo.get(i)[0] == nuevo[0] && obstaculo.get(i)[1] == nuevo[1]) {
-                        choque = true;
-                    }
-                }
-        }
-        if (choque) {
-            mov.parar();
-            JOptionPane.showMessageDialog(this, "Has perdido!!");
-        } else {
-            if (nuevo[0] == comida[0] && nuevo[1] == comida[1]) {
-                serpiente.add(nuevo);
-                generarComida();
-                puntuacion += 5;
-                vista.actualizarPuntuacion(puntuacion);
-            } else {
-                serpiente.add(nuevo);
-                serpiente.remove(0);
-            }
-        }
+        int[] nuevo = servicio.direccion(ultimo);
+        servicio.comprobarChoque(nuevo);
+        servicio.accionChoque(nuevo);
     }
 
     /**
      * Método para que se genere la comida
      */
     public void generarComida() {
-        boolean ocupado = false;
         int x = (int) (Math.random() * can);
         int y = (int) (Math.random() * can);
-        for (int[] coordenada : serpiente) {
-            if (coordenada[0] == x && coordenada[1] == y) {
-                ocupado = true;
-                break;
-            }
-        }
-        if (ocupado) {
+        if (servicio.ocupadoGeneracionComida(x, y)) {
             generarComida();
         } else {
             comida = new int[]{x, y};
@@ -418,10 +388,9 @@ public class Serpiente extends JPanel {
     }
 
     /**
-     * Método para que se generen diferentes números de obstaculos y en diferentes posiciones
-     * además de mostrar donde van a aparecer los siguientes obstaculos
+     * Metodo para que se generen diferentes numeros de obstaculos y en diferentes posiciones
+     * ademas de mostrar donde van a aparecer los siguientes obstaculos
      *
-     * @return
      */
     public void generarObstaculo() {
         boolean ocupado = false;
@@ -435,26 +404,9 @@ public class Serpiente extends JPanel {
         for (int i = 0; i < numFuturosCuadrados; i++) {
             x += (int) (Math.random() * 2);
             y += (int) (Math.random() * 2);
-
-            if (x >= can)
-                x--;
-            else if (x < 0)
-                x++;
-            else if (y >= can)
-                y--;
-            else if (y < 0)
-                y++;
-            futuroobstaculo.add(new int[]{x, y});
+            futuroobstaculo.add(servicio.comprobarBordeObstaculo(x, y));
         }
-        for (int i = 0; i < numFuturosCuadrados; i++) {
-            for (int[] coordenada : serpiente) {
-                if (coordenada[0] == futuroobstaculo.get(i)[0] && coordenada[1] == futuroobstaculo.get(i)[1]) {
-                    ocupado = true;
-                    break;
-                }
-            }
-        }
-        if (ocupado) {
+        if (servicio.ocupadoGeneracionObstaculo(x,y)) {
             generarObstaculo();
         }
     }

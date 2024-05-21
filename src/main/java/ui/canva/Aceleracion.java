@@ -2,6 +2,8 @@ package ui.canva;
 
 
 /**
+ * Clase que se ejecuta en un hilo paralelo y se encarga de acelerar la serpiente durante 5 segundos cada 20-40 segundos
+ *
  * @author Rodrigo
  * @author Patricia
  */
@@ -22,8 +24,8 @@ public class Aceleracion implements Runnable {
     }
 
     /**
-     * Método que se ejecuta cuando se inicia el hilo en el que va a acelerar durante 5s cada 20s
-     * y después volverá a su velocidad original
+     * Metodo que se ejecuta cuando se inicia el hilo en el que va a acelerar durante 5s cada 20s
+     * y despues volvera a su velocidad original
      */
     @Override
     public void run() {

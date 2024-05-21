@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * Clase encargada de crear la cuadrícula de fondo sobre la que se mueve la serpiente
+ *
  * @author Rodrigo
  * @author Patricia
  */
@@ -15,22 +17,22 @@ public class Fondo extends JPanel {
     private Color colorFondo = Color.gray;
 
     /**
-     * El tamaño máximo.
+     * El tamano maximo.
      */
     private int tamMax;
 
     /**
-     * El tamaño de los cuadrados.
+     * El tamano de los cuadrados.
      */
     private int tam;
 
     /**
-     * El número de cuadrados.
+     * El numero de cuadrados.
      */
     private int can;
 
     /**
-     * El resto de la división del tamaño máximo por el número de cuadrados.
+     * El resto de la division del tamano maximo por el numero de cuadrados.
      */
     private int res;
 
@@ -38,41 +40,26 @@ public class Fondo extends JPanel {
         return colorFondo;
     }
 
-    public void setColorFondo(Color colorFondo) {
-        this.colorFondo = colorFondo;
-    }
 
     public int getTamMax() {
         return tamMax;
     }
 
-    public void setTamMax(int tamMax) {
-        this.tamMax = tamMax;
-    }
 
     public int getTam() {
         return tam;
     }
 
-    public void setTam(int tam) {
-        this.tam = tam;
-    }
 
     public int getCan() {
         return can;
     }
 
-    public void setCan(int can) {
-        this.can = can;
-    }
 
     public int getRes() {
         return res;
     }
 
-    public void setRes(int res) {
-        this.res = res;
-    }
 
     /**
      * Constructor para la clase Fondo.
