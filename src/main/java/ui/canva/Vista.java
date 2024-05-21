@@ -33,6 +33,10 @@ public class Vista extends JFrame {
      */
     JTextField puntuacion;
 
+    public JTextField getPuntuacion() {
+        return puntuacion;
+    }
+
     /**
      * Objeto servicio que hara comprobaciones y calculos
      */
