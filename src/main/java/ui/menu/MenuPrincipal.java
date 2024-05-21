@@ -46,7 +46,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         ventana.getContentPane().add(boton, BorderLayout.SOUTH);
-        System.out.println(ventana.getContentPane().getComponentCount());
         ventana.pack();
         ventana.setVisible(true);
     }
