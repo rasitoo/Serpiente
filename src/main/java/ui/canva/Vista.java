@@ -16,22 +16,22 @@ public class Vista extends JFrame {
     /**
      * El ancho y alto de la ventana
      */
-    int ancho, alto;
+    private int ancho, alto;
 
     /**
      * La clase serpiente que contiene el panel con la serpiente, comida y obstaculos
      */
-    Serpiente serpiente;
+    private Serpiente serpiente;
 
     /**
      * El fondo del juego
      */
-    Fondo fondo;
+    private Fondo fondo;
 
     /**
      * El lugar donde se va a mostrar la puntuacion
      */
-    JTextField puntuacion;
+    private JTextField puntuacion;
 
     public JTextField getPuntuacion() {
         return puntuacion;
