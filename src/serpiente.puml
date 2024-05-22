@@ -2,11 +2,13 @@
 'https://plantuml.com/class-diagram
 
 Serpiente <-- Obstaculo
+Serpiente <-- ServicioSerpiente
 Serpiente <-- Aceleracion
 Serpiente <-- Movimiento
 Fondo --> Vista
 Serpiente --> Vista
 MenuPrincipal <-- Vista
+Vista <-- ServicioVista
 
 class Serpiente extends JPanel {
     -private final Vista vista;
@@ -58,10 +60,20 @@ class Serpiente extends JPanel {
     +public void setCambiodir(String cambiodir)
     +public Serpiente(int tammax, int can, Vista vista)
     +public void paint(Graphics g)
+    -private Polygon crearCabeza(int i)
     +public void avanzar()
     +public void generarComida()
     +public void generarObstaculo()
 
+}
+
+class ServicioSerpiente{
+    -private Serpiente serpiente
+    +public ServicioSerpiente(Serpiente serpiente)
+    +public int[] direccion(int[] ultimo)
+    +public int[] comprobarBordeSerpiente(int x, int y)
+    +public int[] comprobarBordeObstaculo(int x, int y)
+    +public void accionChoque(int[] nuevo)
 }
 
 class Aceleracion implements Runnable {
@@ -81,12 +93,13 @@ class Obstaculo implements Runnable {
 class Movimiento implements Runnable {
     -private Serpiente serpiente
     -private int VELOCIDAD
+    +public void setVelocidad(int VELOCIDAD)
+    +public int getVelocidad()
     -private boolean movimiento
     +public Movimiento(Serpiente serpiente)
     +public void run()
     +public void parar()
-    +public void setVelocidad(int VELOCIDAD)
-    +public int getVelocidad()
+
 }
 
 class Fondo extends JPanel {
@@ -95,6 +108,11 @@ class Fondo extends JPanel {
     -private int tam
     -private int can
     -private int res
+    +public Color getColorFondo()
+    +public int getTamMax()
+    +public int getTam()
+    +public int getCan()
+    +public int getRes()
     +public Fondo(int tamMax, int can)
     +public void paint(Graphics g)
 }
@@ -105,11 +123,19 @@ class Vista extends JFrame {
     Fondo fondo
     JTextField puntuacion
     JPanel panelpuntuacion
+    +public JTextField getPuntuacion()
+    ServicioVista servicio
+    +public Serpiente getSerpiente()
     +public Vista(String tituloVentana, int ancho, String dificultad)
-    -private void tecla(KeyEvent event)
-    void actualizarPuntuacion(int puntuacion)
+    +public void actualizarPuntuacion(int puntuacion)
     -private void initComponents()
     +public static void main(String args[])
+}
+
+class ServicioVista {
+    Vista vista
+    +public ServicioVista(Vista vista)
+    +public void tecla(KeyEvent event)
 }
 
 class MenuPrincipal extends javax.swing.JFrame{
