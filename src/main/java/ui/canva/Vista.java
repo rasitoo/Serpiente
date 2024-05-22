@@ -40,7 +40,7 @@ public class Vista extends JFrame {
     /**
      * Objeto servicio que hara comprobaciones y calculos
      */
-    ServicioVista servicio = new ServicioVista(this);
+    private ServicioVista servicio = new ServicioVista(this);
 
     /**
      * Constructor de la clase Vista.

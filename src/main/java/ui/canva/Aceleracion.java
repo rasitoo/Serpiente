@@ -12,7 +12,7 @@ public class Aceleracion implements Runnable {
     /**
      * Movimiento de la serpiente.
      */
-    Movimiento movimiento;
+    private Movimiento movimiento;
 
     /**
      * Constructor de la clase Aceleracion.
