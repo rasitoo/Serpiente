@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import servicio.ServicioSerpiente;
 import ui.canva.Serpiente;
 
 import java.awt.*;
@@ -13,6 +14,7 @@ import static org.mockito.Mockito.*;
 public class SerpienteTest {
 
     private Serpiente serpiente;
+    private ServicioSerpiente servicioSerpiente;
     private List<int[]> obstaculos;
     private List<int[]> futuroObstaculos;
 
@@ -71,7 +73,7 @@ public class SerpienteTest {
 
     @Test
     void testGenerarComida() {
-        serpiente.generarComida();
+        serpiente.servicio.generarComida(serpiente);
 
         assertTrue(serpiente.getComida()[0] >= 0 && serpiente.getComida()[0] < 10);
         assertTrue(serpiente.getComida()[1] >= 0 && serpiente.getComida()[1] < 10);
@@ -79,7 +81,7 @@ public class SerpienteTest {
 
     @Test
     void testGenerarObstaculo() {
-        serpiente.generarObstaculo();
+        servicioSerpiente.generarObstaculo();
 
         assertTrue(!serpiente.getObstaculo().isEmpty() && serpiente.getObstaculo().size() <= 3);
         for (int[] obstaculo : serpiente.getObstaculo()) {

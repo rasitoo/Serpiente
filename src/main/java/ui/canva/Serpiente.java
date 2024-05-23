@@ -133,7 +133,7 @@ public class Serpiente extends JPanel {
     /**
      * Objeto que hara comprobaciones y calculos
      */
-    private ServicioSerpiente servicio = new ServicioSerpiente(this);
+    public ServicioSerpiente servicio = new ServicioSerpiente(this);
 
     public Color getColorfuturoobstaculo() {
         return colorfuturoobstaculo;
@@ -245,6 +245,32 @@ public class Serpiente extends JPanel {
         return vista;
     }
 
+    public int getTam() {
+        return tam;
+    }
+
+    public void setTam(int tam) {
+        this.tam = tam;
+    }
+
+    public int getRes() {
+        return res;
+    }
+
+    public void setRes(int res) {
+        this.res = res;
+    }
+
+    public void setNumCuadrados(int numCuadrados) {
+        this.numCuadrados = numCuadrados;
+    }
+
+    public void setNumFuturosCuadrados(int numFuturosCuadrados) {
+        this.numFuturosCuadrados = numFuturosCuadrados;
+    }
+
+
+
     /**
      * Constructor para la clase Serpiente.
      *
@@ -264,7 +290,7 @@ public class Serpiente extends JPanel {
         int[] b = {can / 2, can / 2 - 1};
         serpiente.add(a);
         serpiente.add(b);
-        generarComida();
+        servicio.generarComida(this);
 
         mov = new Movimiento(this);
         movim = new Thread(mov);
@@ -287,7 +313,7 @@ public class Serpiente extends JPanel {
         super.paint(g); //Cuando pinta lo hace iniciando de nuevo, haciendo que se mueva, es decir, lo que estaba antes lo borra
         for (int i = 0; i < serpiente.size(); i++) {
             if (i == serpiente.size() - 1) {
-                Polygon cabeza = crearCabeza(i);
+                Polygon cabeza = servicio.crearCabeza(i, this);
                 g.setColor(Color.lightGray);
                 g.fillPolygon(cabeza);
             } else if (i % 2 == 0) {
@@ -312,57 +338,6 @@ public class Serpiente extends JPanel {
         }
     }
 
-    /**
-     * Crea un arco semicircular para la cabeza de la serpiente.
-     *
-     * @param i Indice de la parte del cuerpo de la serpiente
-     * @return Un objeto Polygon que representa el arco semicircular de la cabeza
-     */
-    private Polygon crearCabeza(int i) {
-        Polygon semiArc = new Polygon();
-
-        int radio = tam / 2;
-        int centroX = res / 2 + serpiente.get(i)[0] * tam;
-        int centroY = (int) (res / 2 + serpiente.get(i)[1] * tam);
-        int anguloInicial = 0;
-        int anguloFinal = 0;
-
-        // Determina los angulos inicial y final del arco semicircular según la dirección actual de la serpiente
-        switch (dir) {
-            case "der":
-                centroX += 0;
-                centroY += tam / 2;
-                anguloInicial = 270;
-                anguloFinal = 450;
-                break;
-            case "izq":
-                centroX += tam;
-                centroY += tam / 2;
-                anguloInicial = 90;
-                anguloFinal = 270;
-                break;
-            case "arr":
-                centroX += tam / 2;
-                centroY += tam;
-                anguloInicial = 0;
-                anguloFinal = 180;
-                break;
-            case "aba":
-                centroX += tam / 2;
-                centroY += 0;
-                anguloInicial = 180;
-                anguloFinal = 360;
-                break;
-        }
-        // Crea un arco semicircular añadiendo puntos al objeto Polygon según el centro, radio y ángulos calculados
-        for (int angulo = anguloInicial; angulo <= anguloFinal; angulo++) {
-            int x = centroX + (int) (radio * Math.cos(Math.toRadians(angulo)));
-            int y = centroY - (int) (radio * Math.sin(Math.toRadians(angulo)));
-            semiArc.addPoint(x, y);
-        }
-        return semiArc;
-    }
-
 
     /**
      * Metodo para que la serpiente avance, cambie de direccion cada vez que se pulsa una flecha,
@@ -375,43 +350,6 @@ public class Serpiente extends JPanel {
         int[] nuevo = servicio.direccion(ultimo);
         servicio.comprobarChoque(nuevo);
         servicio.accionChoque(nuevo);
-    }
-
-    /**
-     * Método para que se genere la comida
-     */
-    public void generarComida() {
-        int x = (int) (Math.random() * can);
-        int y = (int) (Math.random() * can);
-        if (servicio.ocupadoGeneracionComida(x, y)) {
-            generarComida();
-        } else {
-            comida = new int[]{x, y};
-        }
-    }
-
-    /**
-     * Metodo para que se generen diferentes numeros de obstaculos y en diferentes posiciones
-     * ademas de mostrar donde van a aparecer los siguientes obstaculos
-     *
-     */
-    public void generarObstaculo() {
-        boolean ocupado = false;
-        numCuadrados = numFuturosCuadrados;
-        numFuturosCuadrados = (int) (Math.random() * 3 + 1);
-        int x = (int) (Math.random() * can);
-        int y = (int) (Math.random() * can);
-        obstaculo = futuroobstaculo;
-        futuroobstaculo = new ArrayList<>();
-        futuroobstaculo.add(new int[]{x, y});
-        for (int i = 0; i < numFuturosCuadrados; i++) {
-            x += (int) (Math.random() * 2);
-            y += (int) (Math.random() * 2);
-            futuroobstaculo.add(servicio.comprobarBordeObstaculo(x, y));
-        }
-        if (servicio.ocupadoGeneracionObstaculo(x,y)) {
-            generarObstaculo();
-        }
     }
 
 }

@@ -12,7 +12,7 @@ import ui.canva.Serpiente;
 public class Obstaculo implements Runnable {
 
     /**
-     * La clase serpiente donde se generaran los obstaculos.
+     * La clase serpiente.
      */
     private Serpiente serpiente;
 
@@ -20,6 +20,11 @@ public class Obstaculo implements Runnable {
      * Indica si se generan obstaculos.
      */
     private boolean generar = true;
+
+    /**
+     * La clase servicio serpiente donde se generaran los obstaculos.
+     */
+    private ServicioSerpiente servicioSerpiente;
 
     /**
      * Constructor para la clase Obstaculo.
@@ -40,7 +45,7 @@ public class Obstaculo implements Runnable {
     @Override
     public void run() {
         while (generar) {
-            serpiente.generarObstaculo();
+            servicioSerpiente.generarObstaculo();
             serpiente.repaint();
             try {
                 Thread.sleep(5000);
