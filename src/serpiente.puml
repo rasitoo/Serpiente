@@ -12,30 +12,30 @@ Vista <-- ServicioVista
 
 class Serpiente extends JPanel {
     -private final Vista vista;
-    Color colorserpiente
-    Color colorfuturoobstaculo
-    ImageIcon imgComida
-    ImageIcon imgObst
-    int tammax
-    int tam
-    int can
-    int res
-    List<int[]> serpiente
-    int[] comida
-    List<int[]> obstaculo
-    List<int[]> futuroobstaculo
-    int numCuadrados
-    int numFuturosCuadrados
-    String dir
-    String cambiodir
-    int puntuacion
-    boolean choque
-    Thread movim
-    Movimiento mov
-    Thread obst
-    Obstaculo obstaculo1
-    Thread acele
-    Aceleracion aceleracion
+    -private Color colorserpiente
+    -private Color colorfuturoobstaculo
+    -private ImageIcon imgComida
+    -private ImageIcon imgObst
+    -private int tammax
+    -private int tam
+    -private int can
+    -private int res
+    -private List<int[]> serpiente
+    -private int[] comida
+    -private List<int[]> obstaculo
+    -private List<int[]> futuroobstaculo
+    -private int numCuadrados
+    -private int numFuturosCuadrados
+    -private String dir
+    -private String cambiodir
+    -private int puntuacion
+    -private boolean choque
+    -private Thread movim
+    -private Movimiento mov
+    -private Thread obst
+    -private Obstaculo obstaculo1
+    -private Thread acele
+    -private Aceleracion aceleracion
     +public Color getColorfuturoobstaculo()
     +public Color getColorserpiente()
     +public Thread getMovim()
@@ -77,8 +77,8 @@ class ServicioSerpiente{
 }
 
 class Aceleracion implements Runnable {
-    Movimiento movimiento;
-    Aceleracion(Movimiento movimiento)
+    -private Movimiento movimiento;
+    -private Aceleracion(Movimiento movimiento)
     +public void run()
 }
 
@@ -118,13 +118,14 @@ class Fondo extends JPanel {
 }
 
 class Vista extends JFrame {
-    int ancho, alto
-    Serpiente serpiente
-    Fondo fondo
-    JTextField puntuacion
-    JPanel panelpuntuacion
+    -private int ancho
+    -private int alto
+    -private Serpiente serpiente
+    -private Fondo fondo
+    -private JTextField puntuacion
+    -private JPanel panelpuntuacion
     +public JTextField getPuntuacion()
-    ServicioVista servicio
+    -private ServicioVista servicio
     +public Serpiente getSerpiente()
     +public Vista(String tituloVentana, int ancho, String dificultad)
     +public void actualizarPuntuacion(int puntuacion)
@@ -133,7 +134,7 @@ class Vista extends JFrame {
 }
 
 class ServicioVista {
-    Vista vista
+    -private Vista vista
     +public ServicioVista(Vista vista)
     +public void tecla(KeyEvent event)
 }
