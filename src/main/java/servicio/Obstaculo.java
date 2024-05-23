@@ -24,7 +24,7 @@ public class Obstaculo implements Runnable {
     /**
      * La clase servicio serpiente donde se generaran los obstaculos.
      */
-    private ServicioSerpiente servicioSerpiente;
+    private ServicioSerpiente servicioSerpiente=new ServicioSerpiente(serpiente);
 
     /**
      * Constructor para la clase Obstaculo.
