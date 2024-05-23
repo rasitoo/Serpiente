@@ -181,10 +181,9 @@ public class ServicioSerpiente {
      * Crea un arco semicircular para la cabeza de la serpiente.
      *
      * @param i         Indice de la parte del cuerpo de la serpiente
-     * @param serpiente
      * @return Un objeto Polygon que representa el arco semicircular de la cabeza
      */
-    public Polygon crearCabeza(int i, Serpiente serpiente) {
+    public Polygon crearCabeza(int i) {
         Polygon semiArc = new Polygon();
 
         int radio = serpiente.getTam() / 2;
@@ -250,7 +249,6 @@ public class ServicioSerpiente {
      *
      */
     public void generarObstaculo() {
-        boolean ocupado = false;
         serpiente.setNumCuadrados(serpiente.getNumFuturosCuadrados());
         serpiente.setNumFuturosCuadrados((int) (Math.random() * 3 + 1));
         int x = (int) (Math.random() * serpiente.getCan());

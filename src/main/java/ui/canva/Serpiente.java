@@ -313,7 +313,7 @@ public class Serpiente extends JPanel {
         super.paint(g); //Cuando pinta lo hace iniciando de nuevo, haciendo que se mueva, es decir, lo que estaba antes lo borra
         for (int i = 0; i < serpiente.size(); i++) {
             if (i == serpiente.size() - 1) {
-                Polygon cabeza = servicio.crearCabeza(i, this);
+                Polygon cabeza = servicio.crearCabeza(i);
                 g.setColor(Color.lightGray);
                 g.fillPolygon(cabeza);
             } else if (i % 2 == 0) {

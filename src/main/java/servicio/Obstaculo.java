@@ -24,7 +24,7 @@ public class Obstaculo implements Runnable {
     /**
      * La clase servicio serpiente donde se generaran los obstaculos.
      */
-    private ServicioSerpiente servicioSerpiente=new ServicioSerpiente(serpiente);
+    private ServicioSerpiente servicioSerpiente;
 
     /**
      * Constructor para la clase Obstaculo.
@@ -44,6 +44,7 @@ public class Obstaculo implements Runnable {
      */
     @Override
     public void run() {
+        servicioSerpiente = new ServicioSerpiente(serpiente);
         while (generar) {
             servicioSerpiente.generarObstaculo();
             serpiente.repaint();
