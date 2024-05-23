@@ -21,6 +21,7 @@ public class SerpienteTest {
     @BeforeEach
     void inicio() {
         serpiente = new Serpiente(10, 10, null);
+        servicioSerpiente = new ServicioSerpiente(serpiente);
         obstaculos = new ArrayList<>();
         futuroObstaculos = new ArrayList<>();
     }
