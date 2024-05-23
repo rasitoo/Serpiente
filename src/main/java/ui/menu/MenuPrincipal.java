@@ -24,10 +24,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
 
     /**
+     * Metodo estatico abre la ventana del menu principal
+     *
      * @param titulo el titulo de la ventana.
-     *               <p>
-     *               <p>
-     *               Metodo estatico abre la ventana del menu principal
      */
 
     public MenuPrincipal(String titulo) {
