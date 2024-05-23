@@ -11,7 +11,15 @@ import java.awt.event.KeyEvent;
  * @author Patri
  */
 public class ServicioVista {
-    Vista vista;
+    /**
+     * La vista que se utilizara para mostrar la serpiente y el tablero.
+     */
+    private Vista vista;
+
+    /**
+     * Constructor de la clase ServicioVista
+     * @param vista
+     */
     public ServicioVista(Vista vista) {
         this.vista = vista;
     }
