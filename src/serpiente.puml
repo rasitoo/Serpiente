@@ -60,10 +60,6 @@ class Serpiente extends JPanel {
     +public void setCambiodir(String cambiodir)
     +public Serpiente(int tammax, int can, Vista vista)
     +public void paint(Graphics g)
-    -private Polygon crearCabeza(int i)
-    +public void avanzar()
-    +public void generarComida()
-    +public void generarObstaculo()
 
 }
 
@@ -74,6 +70,10 @@ class ServicioSerpiente{
     +public int[] comprobarBordeSerpiente(int x, int y)
     +public int[] comprobarBordeObstaculo(int x, int y)
     +public void accionChoque(int[] nuevo)
+    +public Polygon crearCabeza(int i)
+    +public void avanzar()
+    +public void generarComida()
+    +public void generarObstaculo()
 }
 
 class Aceleracion implements Runnable {
