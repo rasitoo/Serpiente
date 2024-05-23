@@ -265,5 +265,20 @@ public class ServicioSerpiente {
             generarObstaculo();
         }
     }
+
+    /**
+     * Metodo para que la serpiente avance, cambie de direccion cada vez que se pulsa una flecha,
+     * cuando el cuerpo de la serpiente se encuentre con un obstaculo se choque y
+     * se acabe la partida, que los obstaculos y la comida no aparezcan encima de la serpiente
+     *
+     * @param serpiente
+     */
+    public void avanzar(Serpiente serpiente) {
+        serpiente.setDir(serpiente.getCambiodir()); //Antes de avanzar pone la nueva direccion
+        int[] ultimo = serpiente.getSerpiente().get((serpiente.getSerpiente().size() - 1));
+        int[] nuevo = direccion(ultimo);
+        comprobarChoque(nuevo);
+        accionChoque(nuevo);
+    }
 }
 

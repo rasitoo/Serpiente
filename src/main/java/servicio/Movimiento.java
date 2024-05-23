@@ -51,7 +51,7 @@ public class Movimiento implements Runnable {
     @Override
     public void run() {
         while (movimiento) {
-            serpiente.avanzar();
+            serpiente.servicio.avanzar(serpiente);
             serpiente.repaint();
             try {
                 Thread.sleep(velocidad);

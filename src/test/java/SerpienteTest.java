@@ -62,7 +62,7 @@ public class SerpienteTest {
         serpiente.setObstaculo(new ArrayList<>(List.of(new int[]{0, 0})));
         serpiente.setFuturoobstaculo(new ArrayList<>(List.of(new int[]{0, 0})));
 
-        serpiente.avanzar();
+        serpiente.servicio.avanzar(serpiente);
 
         assertEquals(2, serpiente.getSerpiente().size());
         assertArrayEquals(new int[]{0, 1}, serpiente.getSerpiente().get(0));

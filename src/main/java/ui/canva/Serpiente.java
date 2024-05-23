@@ -241,6 +241,10 @@ public class Serpiente extends JPanel {
         this.cambiodir = cambiodir;
     }
 
+    public String getCambiodir() {
+        return cambiodir;
+    }
+
     public Vista getVista() {
         return vista;
     }
@@ -337,19 +341,4 @@ public class Serpiente extends JPanel {
             g.drawImage(imgObst.getImage(), res / 2 + obstaculo.get(i)[0] * tam, res / 2 + obstaculo.get(i)[1] * tam, tam - 1, tam - 1, null);
         }
     }
-
-
-    /**
-     * Metodo para que la serpiente avance, cambie de direccion cada vez que se pulsa una flecha,
-     * cuando el cuerpo de la serpiente se encuentre con un obstaculo se choque y
-     * se acabe la partida, que los obstaculos y la comida no aparezcan encima de la serpiente
-     */
-    public void avanzar() {
-        this.dir = this.cambiodir; //Antes de avanzar pone la nueva direccion
-        int[] ultimo = serpiente.get((serpiente.size() - 1));
-        int[] nuevo = servicio.direccion(ultimo);
-        servicio.comprobarChoque(nuevo);
-        servicio.accionChoque(nuevo);
-    }
-
 }
