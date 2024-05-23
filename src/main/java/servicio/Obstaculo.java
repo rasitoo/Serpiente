@@ -1,5 +1,7 @@
-package ui.canva;
+package servicio;
 
+
+import ui.canva.Serpiente;
 
 /**
  * Clase que se ejecuta en un hilo paralelo y se encarga de añadir los obstaculos cada 5 segundos en el panel serpiente

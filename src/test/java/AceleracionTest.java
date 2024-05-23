@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
-import ui.canva.Aceleracion;
-import ui.canva.Movimiento;
+import servicio.Aceleracion;
+import servicio.Movimiento;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;

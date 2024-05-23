@@ -1,5 +1,7 @@
-package ui.canva;
+package servicio;
 
+
+import ui.canva.Serpiente;
 
 /**
  * Clase en un hilo paralelo que se encarga del movimiento y velocidad de la serpiente

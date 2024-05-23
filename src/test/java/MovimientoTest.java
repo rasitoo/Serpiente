@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
-import ui.canva.Movimiento;
+import servicio.Movimiento;
 import ui.canva.Serpiente;
-import ui.canva.Vista;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

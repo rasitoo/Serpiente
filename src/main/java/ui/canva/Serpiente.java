@@ -1,6 +1,9 @@
 package ui.canva;
 
 
+import servicio.Aceleracion;
+import servicio.Movimiento;
+import servicio.Obstaculo;
 import servicio.ServicioSerpiente;
 
 import javax.swing.*;

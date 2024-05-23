@@ -1,5 +1,5 @@
 import org.junit.Test;
-import ui.canva.Obstaculo;
+import servicio.Obstaculo;
 import ui.canva.Serpiente;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
